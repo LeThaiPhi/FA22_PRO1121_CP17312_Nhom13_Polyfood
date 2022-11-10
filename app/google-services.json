@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926024047761",
+    "project_id": "duan-oder-doan",
+    "storage_bucket": "duan-oder-doan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926024047761:android:6dc3ff427e8f552be97330",
+        "android_client_info": {
+          "package_name": "com.example.duan_oder_doan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926024047761-06jv29367vq2uhp842mo38coen7gsjgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Wr75g6IWOZk3jg0PJGqhzU_v2VXFzjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926024047761-06jv29367vq2uhp842mo38coen7gsjgo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
