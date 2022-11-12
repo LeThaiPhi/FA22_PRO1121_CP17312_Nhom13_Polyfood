@@ -87,46 +87,32 @@ public class DangNhap extends AppCompatActivity {
             edt_pass.requestFocus();
             return;
         }
-        if (edt_email.getText().toString().equalsIgnoreCase("manage@gmail.com") && edt_pass.getText().toString().equalsIgnoreCase("123") ) {
-            Intent intent = new Intent(this, TrangChuManage.class);
-            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
-            startActivity(intent, bundle);
-        } else {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-//                               FirebaseUser user = mAuth.getCurrentUser();
-//                                if (user.isEmailVerified()) {
-                                    Toast.makeText(DangNhap.this, "User has been login successfully!",
-                                            Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(DangNhap.this, TrangChuUser.class);
-                                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
-                                    startActivity(intent, bundle);
-//                                } else {
-//                                    user.sendEmailVerification()
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//                                                    if (task.isSuccessful()) {
-//                                                        Toast.makeText(DangNhap.this, "Check your email to verify your account!",
-//                                                                Toast.LENGTH_LONG).show();
-//                                                    }
-//                                                }
-//                                            });
-//                                }
-
+                            if (edt_email.getText().toString().equalsIgnoreCase("admin@gmail.com") && edt_pass.getText().toString().equalsIgnoreCase("123456") ) {
+                                Intent intent = new Intent(DangNhap.this, TrangChuManage.class);
+                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
+                                startActivity(intent, bundle);
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(DangNhap.this, "Failed to login! Please check your credentials!",
+                                Toast.makeText(DangNhap.this, "User has been login successfully!",
                                         Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(DangNhap.this, TrangChuUser.class);
+                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
+                                startActivity(intent, bundle);
                             }
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(DangNhap.this, "Failed to login! Please check your credentials!",
+                                    Toast.LENGTH_LONG).show();
                         }
+                    }
             });
         }
 
 
-    }
 }
