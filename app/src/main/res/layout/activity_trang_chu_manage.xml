@@ -41,29 +41,17 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <ImageView
-            android:id="@+id/imgMenu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_menu"
-            app:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@id/tvHello"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvHello"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/white_background"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgMenu">
+            app:layout_constraintTop_toTopOf="parent">
 
             <EditText
                 android:layout_width="0dp"
@@ -85,7 +73,7 @@
                 android:contentDescription="@string/app_name"
                 android:padding="6dp"
                 android:src="@drawable/ic_earch"
-                app:tint="@color/colorPrimary" />
+                app:tint="#FF9800" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,12 +85,12 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeader"
-        >
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:id="@+id/layoutCourses"
@@ -128,11 +116,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Hóa đơn"
+                    android:text="Oders"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_countOrders"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/border6"
+                android:backgroundTint="#FF9800"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="0"
+                android:textColor="#ffff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.401"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/layoutMaps"
@@ -158,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Thống kê"
+                    android:text="Statistical"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
@@ -188,7 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Thêm"
+                    android:text="Add"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
@@ -218,7 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="User admin"
+                    android:text="Admin"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
