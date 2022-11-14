@@ -36,7 +36,7 @@ import me.relex.circleindicator.CircleIndicator3;
 public class TrangChuUser extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
-    int[] images = {R.drawable.mhc1,R.drawable.mhc2,R.drawable.mhc4,R.drawable.mhc5,R.drawable.mhc6};
+    int[] images = {R.drawable.mhc1,R.drawable.vdfood,R.drawable.mhc4,R.drawable.mhc5,R.drawable.mhc6};
     private PagerAdapter_ThongBao pagerAdapterThongBao;
     private CircleIndicator3 circleIndicator;
     private Timer timer;
