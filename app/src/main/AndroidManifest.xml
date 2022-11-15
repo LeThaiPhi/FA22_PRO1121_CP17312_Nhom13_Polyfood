@@ -4,7 +4,7 @@
     package="com.example.duan_oder_doan">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +17,21 @@
         android:theme="@style/Theme.DuAn_Oder_DoAn"
         tools:targetApi="31">
         <activity
+            android:name=".AdminManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatisticalManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddFoodManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OdersManageActivity"
+            android:exported="false" />
+        <activity
             android:name=".XacNhanPass_Email"
             android:exported="false"
-            android:parentActivityName=".DangNhap"/>
+            android:parentActivityName=".DangNhap" />
         <activity
             android:name=".TimKiemFoodUser"
             android:exported="false"

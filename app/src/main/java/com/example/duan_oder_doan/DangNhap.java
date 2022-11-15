@@ -31,7 +31,6 @@ public class DangNhap extends AppCompatActivity {
     private TextView tv_signup;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
