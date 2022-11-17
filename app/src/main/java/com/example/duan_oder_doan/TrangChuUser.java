@@ -2,6 +2,7 @@ package com.example.duan_oder_doan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -16,7 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.duan_oder_doan.adapter.Adapter_Category_Admin;
+import com.example.duan_oder_doan.adapter.Adapter_Category_User;
 import com.example.duan_oder_doan.adapter.PagerAdapter_ThongBao;
+import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator3;
 
 
-public class TrangChuUser extends AppCompatActivity {
+public class TrangChuUser extends AppCompatActivity{
 
     private ViewPager2 viewPager2;
     int[] images = {R.drawable.mhc1,R.drawable.vdfood,R.drawable.mhc4,R.drawable.mhc5,R.drawable.mhc6};
@@ -49,6 +55,10 @@ public class TrangChuUser extends AppCompatActivity {
     private CircleImageView img_avatar;
     private TextView tv_name;
 
+    private List<TheLoai> theLoaiList = new ArrayList<>();
+    private Adapter_Category_User adapter_category = new Adapter_Category_User(theLoaiList);
+    private RecyclerView rcv_category;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +66,8 @@ public class TrangChuUser extends AppCompatActivity {
 
         tv_name = findViewById(R.id.tv_name);
         img_avatar = findViewById(R.id.img_avatar);
+        rcv_category = findViewById(R.id.rcv_category);
+        getList_Category();
 
         // Lay thong tin tu firebase hien thi len
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -182,5 +194,28 @@ public class TrangChuUser extends AppCompatActivity {
             timer.cancel();
             timer = null;
         }
+    }
+
+    private void getList_Category(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Categories");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    TheLoai theLoai = dataSnapshot.getValue(TheLoai.class);
+                    theLoaiList.add(theLoai);
+                }
+                adapter_category.notifyDataSetChanged();
+                rcv_category.setAdapter(adapter_category);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TrangChuUser.this, "Get list category faild!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

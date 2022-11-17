@@ -2,6 +2,7 @@ package com.example.duan_oder_doan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
@@ -19,6 +20,11 @@ public class AddFoodManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         viewPagerAddFood = findViewById(R.id.viewpager2_add_food);
         tabLayoutAddFood = findViewById(R.id.tablayout_add_food);
