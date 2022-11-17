@@ -18,27 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="ID Category"
-        android:layout_marginTop="20dp"
-        android:textColor="#2E2E2E"
-        android:textSize="20dp"/>
-
-    <EditText
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/edt_idCategory"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="60dp"
-        android:hint="ID category"
-        android:textColorHint="#2E2E2E"
-        android:background="@drawable/border"
-        android:padding="15dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:text="Name Category"
         android:layout_marginTop="20dp"
         android:textColor="#2E2E2E"
@@ -47,7 +26,7 @@
     <EditText
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/edt_nameCategory"
+        android:id="@+id/edt_nameCategoryUpdate"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
@@ -73,14 +52,14 @@
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/img_category"
+            android:id="@+id/img_categoryUpdate"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher"/>
 
         <Button
-            android:id="@+id/btn_imgcategory"
+            android:id="@+id/btn_imgcategoryUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose Image"
