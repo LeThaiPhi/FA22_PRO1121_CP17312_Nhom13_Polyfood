@@ -54,7 +54,8 @@ public class XacNhanPass_Email extends AppCompatActivity {
             return;
         }
         auth = FirebaseAuth.getInstance();
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String emailAddress = email;
+        auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

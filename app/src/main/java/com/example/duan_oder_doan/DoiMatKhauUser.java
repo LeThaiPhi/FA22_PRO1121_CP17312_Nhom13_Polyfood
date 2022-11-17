@@ -141,7 +141,6 @@ public class DoiMatKhauUser extends AppCompatActivity {
                                                 }
                                             }
                                         });
-
                             }else {
                                 Toast.makeText(DoiMatKhauUser.this,"Try again! Something wrong happened!", Toast.LENGTH_LONG).show();
                             }
