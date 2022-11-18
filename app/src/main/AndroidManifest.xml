@@ -17,9 +17,12 @@
         android:theme="@style/Theme.DuAn_Oder_DoAn"
         tools:targetApi="31">
         <activity
+            android:name=".TrangChuChef"
+            android:exported="false" />
+        <activity
             android:name=".FoodList"
             android:exported="false"
-            android:parentActivityName=".TrangChuUser"/>
+            android:parentActivityName=".TrangChuUser" />
         <activity
             android:name=".AdminManageActivity"
             android:exported="false" />
