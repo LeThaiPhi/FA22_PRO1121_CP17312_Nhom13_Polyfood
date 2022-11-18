@@ -11,6 +11,7 @@ import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_Admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.callback.Callback;
@@ -52,5 +53,10 @@ public class Adapter_Category_Admin extends RecyclerView.Adapter<View_Holder_Cat
 
     public  interface Callback{
         void update(TheLoai theLoai);
+    }
+
+    public void filterList(ArrayList<TheLoai> filteredList) {
+        theLoaiList = filteredList;
+        notifyDataSetChanged();
     }
 }

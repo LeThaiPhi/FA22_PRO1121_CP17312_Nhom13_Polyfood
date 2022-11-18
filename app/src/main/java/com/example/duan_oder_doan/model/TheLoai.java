@@ -1,5 +1,7 @@
 package com.example.duan_oder_doan.model;
 
+import androidx.annotation.NonNull;
+
 public class TheLoai {
     private String id;
     private int img_category;
@@ -36,5 +38,11 @@ public class TheLoai {
 
     public void setName_category(String name_category) {
         this.name_category = name_category;
+    }
+
+    @NonNull
+    @Override
+    public String toString(){
+        return getName_category();
     }
 }

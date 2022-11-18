@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator3;
 
 
-public class TrangChuUser extends AppCompatActivity{
+public class TrangChuUser extends AppCompatActivity implements Adapter_Category_User.Callback {
 
     private ViewPager2 viewPager2;
     int[] images = {R.drawable.mhc1,R.drawable.vdfood,R.drawable.mhc4,R.drawable.mhc5,R.drawable.mhc6};
@@ -56,7 +56,7 @@ public class TrangChuUser extends AppCompatActivity{
     private TextView tv_name;
 
     private List<TheLoai> theLoaiList = new ArrayList<>();
-    private Adapter_Category_User adapter_category = new Adapter_Category_User(theLoaiList);
+    private Adapter_Category_User adapter_category = new Adapter_Category_User(theLoaiList, this);
     private RecyclerView rcv_category;
 
     @Override
@@ -98,7 +98,7 @@ public class TrangChuUser extends AppCompatActivity{
         edt_searchfood = findViewById(R.id.edt_searchfood);
         edt_searchfood.setFocusable(false);
         edt_searchfood.setOnClickListener(v->{
-            Intent intent = new Intent(this, TimKiemUser.class);
+            Intent intent = new Intent(this, TimKiemFoodUser.class);
             Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
             startActivity(intent, bundle);
         });
@@ -217,5 +217,14 @@ public class TrangChuUser extends AppCompatActivity{
                 Toast.makeText(TrangChuUser.this, "Get list category faild!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void open(TheLoai theLoai) {
+        Intent intent = new Intent(this, FoodList.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("nameCategory", theLoai.getName_category());
+        intent.putExtra("bundle", bundle);
+        startActivity(intent, bundle);
     }
 }
