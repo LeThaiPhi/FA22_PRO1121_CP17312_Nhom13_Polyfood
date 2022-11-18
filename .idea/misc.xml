@@ -23,6 +23,7 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/border4.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/border5.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/border6.xml" value="0.171" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/border7.xml" value="0.161" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/dialog_bg.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/dialog_mhc.xml" value="0.16" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/header_background.xml" value="0.161" />
@@ -43,6 +44,7 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_person_24_1.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.171" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.161" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_toggle_off_24.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_launcher_background.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/tron.xml" value="0.1595" />
@@ -74,10 +76,12 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_xac_nhan_pass_email.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_yeu_thich_user.xml" value="0.25" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_add_category.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_add_food.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_bottom_anh.xml" value="0.20436083796494228" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_bottom_gioi_tinh.xml" value="0.264" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_gioi_tinh.xml" value="0.25" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_update_category.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_update_food.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/dialog_xoa_tai_khoan.xml" value="0.264" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/frag_add_category.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/frag_add_food.xml" value="0.20521590423257802" />
@@ -102,7 +106,10 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/fragment_trangchu.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/item_category_admin.xml" value="0.20436083796494228" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/item_category_user.xml" value="0.20436083796494228" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/item_food_admin.xml" value="0.264" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/item_food_user.xml" value="0.4" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/item_quangcao.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/spinner_text.xml" value="0.20521590423257802" />
       </map>
     </option>
   </component>

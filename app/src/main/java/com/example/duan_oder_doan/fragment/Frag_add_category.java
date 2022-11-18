@@ -4,6 +4,8 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,6 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
     private EditText edt_nameCategory;
     private EditText edt_idCategory;
     private ImageView img_category;
-    private DatabaseReference reference;
 
     private List<TheLoai> theLoaiList;
     private Adapter_Category_Admin adapter;
@@ -75,23 +76,19 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 String idCategory = edt_idCategory.getText().toString();
                 int image = R.drawable.avatar;
 
-                if (nameCategory.isEmpty()) {
-                    edt_nameCategory.setError("Name Category is required");
-                    edt_nameCategory.requestFocus();
-                    return;
-                }
-
                 if (idCategory.isEmpty()) {
                     edt_idCategory.setError("ID Category is required");
                     edt_idCategory.requestFocus();
                     return;
                 }
 
-                if (idCategory.equalsIgnoreCase(theLoai.getId())) {
-                    edt_idCategory.setError("ID Duplicate!");
-                    edt_idCategory.requestFocus();
+
+                if (nameCategory.isEmpty()) {
+                    edt_nameCategory.setError("Name Category is required");
+                    edt_nameCategory.requestFocus();
                     return;
                 }
+
 
                 theLoai = new TheLoai(idCategory, image, nameCategory);
                 FirebaseDatabase.getInstance().getReference("Categories")
@@ -116,6 +113,34 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
         adapter = new Adapter_Category_Admin(theLoaiList, this);
         getList();
 
+        EditText edt_searchCategory = view.findViewById(R.id.edt_searchCategory);
+        edt_searchCategory.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
+
+    }
+
+    private void filter(String text) {
+        ArrayList<TheLoai> filteredList = new ArrayList<>();
+        for (TheLoai theLoai: theLoaiList){
+            if (theLoai.getName_category().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(theLoai);
+            }
+        }
+        adapter.filterList(filteredList);
     }
 
     private void getList(){

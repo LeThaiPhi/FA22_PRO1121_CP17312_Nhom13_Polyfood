@@ -12,16 +12,17 @@ import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_Admin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.callback.Callback;
 
 public class Adapter_Category_User extends RecyclerView.Adapter<View_Holder_Category_User> {
     private List<TheLoai> theLoaiList;
+    private Callback callback;
 
-    public Adapter_Category_User(List<TheLoai> theLoaiList) {
+    public Adapter_Category_User(List<TheLoai> theLoaiList, Callback callback) {
         this.theLoaiList = theLoaiList;
+        this.callback = callback;
     }
 
     @NonNull
@@ -41,7 +42,7 @@ public class Adapter_Category_User extends RecyclerView.Adapter<View_Holder_Cate
         holder.tvNameCategory.setText(theLoai.getName_category());
         holder.imgCategory.setImageResource(theLoai.getImg_category());
         holder.lineItemCategory.setOnClickListener(v ->{
-
+            callback.open(theLoai);
         });
     }
 
@@ -50,5 +51,7 @@ public class Adapter_Category_User extends RecyclerView.Adapter<View_Holder_Cate
         return theLoaiList == null ? 0 : theLoaiList.size();
     }
 
-
+    public  interface Callback{
+        void open(TheLoai theLoai);
+    }
 }
