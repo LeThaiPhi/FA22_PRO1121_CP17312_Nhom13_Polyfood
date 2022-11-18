@@ -96,6 +96,10 @@ public class DangNhap extends AppCompatActivity {
                                 Intent intent = new Intent(DangNhap.this, TrangChuManage.class);
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
                                 startActivity(intent, bundle);
+                            } else if (edt_email.getText().toString().equalsIgnoreCase("chef@gmail.com") && edt_pass.getText().toString().equalsIgnoreCase("123456") ) {
+                                Intent intent = new Intent(DangNhap.this, TrangChuManage.class);
+                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
+                                startActivity(intent, bundle);
                             } else {
                                 Toast.makeText(DangNhap.this, "User has been login successfully!",
                                         Toast.LENGTH_LONG).show();
