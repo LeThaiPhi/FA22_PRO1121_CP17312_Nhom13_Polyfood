@@ -13,7 +13,6 @@ public class YeuThichUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yeu_thich_user);
-
         findViewById(R.id.img_trangchu).setOnClickListener(v ->{
             Intent intent = new Intent(this, TrangChuUser.class);
             Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();

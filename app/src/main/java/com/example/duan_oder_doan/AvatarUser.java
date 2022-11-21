@@ -1,5 +1,8 @@
 package com.example.duan_oder_doan;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,7 @@ import android.widget.Toast;
 
 import com.example.duan_oder_doan.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +40,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -47,28 +55,32 @@ public class AvatarUser extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
+    private FirebaseStorage storage;
+    private ActivityResultLauncher<String> launcher;
 
     private CircleImageView img_avatar;
-    private String name, email, pass, phone, gender, date_of_birth;
+    private String name, email, pass, phone, gender, date_of_birth, image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avatar_user);
 
+        storage = FirebaseStorage.getInstance();
+
         img_avatar = findViewById(R.id.img_avatar);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
 
                 if (userProfile != null) {
-                    int image1 = userProfile.getImage();
-                    img_avatar.setImageResource(image1);
+                    String image1 = userProfile.getImage();
+                    Picasso.get().load(image1).into(img_avatar);
                     email = userProfile.getEmail();
                     pass = userProfile.getPassword();
                     name = userProfile.getFullName();
@@ -85,11 +97,10 @@ public class AvatarUser extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_update).setOnClickListener(v ->{
-            int image = R.drawable.avatar;
             User userProfile1 = new User(name, email, phone,pass, image, gender, date_of_birth);
-            userProfile1.setImage(img_avatar.getImageAlpha());
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("User")
                     .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -101,6 +112,28 @@ public class AvatarUser extends AppCompatActivity {
                             }
                         }
                     });
+        });
+
+        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                img_avatar.setImageURI(result);
+
+                final StorageReference reference = storage.getReference().child("Images");
+                reference.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                if(uri != null){
+                                    image = uri.toString();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
         });
 
         findViewById(R.id.ln_avatar).setOnClickListener(v ->{
@@ -120,13 +153,7 @@ public class AvatarUser extends AppCompatActivity {
                 dialog.dismiss();
             });
             dialog.findViewById(R.id.tv_to_take_photo).setOnClickListener(view ->{
-                try {
-                    Intent i = new Intent(Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, 999);
-                } catch (Exception exp) {
-                    Log.i("Error", exp.toString());
-                }
+                launcher.launch("image/*");
                 dialog.dismiss();
             });
             dialog.show();
@@ -153,18 +180,19 @@ public class AvatarUser extends AppCompatActivity {
         }
 
         //lấy ảnh
-        if (requestCode == 999) {
-            try {
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                img_avatar.setImageBitmap(selectedImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
-            }
-
-
-        }
+//        if (requestCode == 999) {
+//            try {
+//                final Uri imageUri = data.getData();
+//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+//                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//                img_avatar.setImageBitmap(selectedImage);
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+//            }
+//
+//
+//        }
     }
 }

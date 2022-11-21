@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodList extends AppCompatActivity implements Adapter_Food_User.Callback {
+public class FoodList extends AppCompatActivity{
 
     private List<SanPham> sanPhamList;
     private Adapter_Food_User adapter;
@@ -47,7 +47,7 @@ public class FoodList extends AppCompatActivity implements Adapter_Food_User.Cal
         String category = bundle.getString("nameCategory");
         recyclerView = findViewById(R.id.rcv_food);
         sanPhamList = new ArrayList<>();
-        adapter = new Adapter_Food_User(sanPhamList, this);
+        adapter = new Adapter_Food_User(sanPhamList);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Foods");
 
@@ -73,8 +73,4 @@ public class FoodList extends AppCompatActivity implements Adapter_Food_User.Cal
     }
 
 
-    @Override
-    public void open(SanPham sanPham) {
-
-    }
 }

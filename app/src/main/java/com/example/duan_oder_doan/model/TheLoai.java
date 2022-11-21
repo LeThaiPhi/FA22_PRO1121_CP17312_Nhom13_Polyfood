@@ -3,24 +3,24 @@ package com.example.duan_oder_doan.model;
 import androidx.annotation.NonNull;
 
 public class TheLoai {
-    private String id;
+    private int id;
     private int img_category;
     private String name_category;
 
     public TheLoai() {
     }
 
-    public TheLoai(String id, int img_category, String name_category) {
+    public TheLoai(int id, int img_category, String name_category) {
         this.id = id;
         this.img_category = img_category;
         this.name_category = name_category;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

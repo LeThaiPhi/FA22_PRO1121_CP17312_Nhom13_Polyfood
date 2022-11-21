@@ -97,7 +97,7 @@ public class DangNhap extends AppCompatActivity {
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
                                 startActivity(intent, bundle);
                             } else if (edt_email.getText().toString().equalsIgnoreCase("chef@gmail.com") && edt_pass.getText().toString().equalsIgnoreCase("123456") ) {
-                                Intent intent = new Intent(DangNhap.this, TrangChuManage.class);
+                                Intent intent = new Intent(DangNhap.this, TrangChuChef.class);
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
                                 startActivity(intent, bundle);
                             } else {

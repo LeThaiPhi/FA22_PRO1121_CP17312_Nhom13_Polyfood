@@ -22,9 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.DangKy;
 import com.example.duan_oder_doan.DangNhap;
+import com.example.duan_oder_doan.EmailUser;
 import com.example.duan_oder_doan.PhoneUser;
 import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.adapter.Adapter_Category_Admin;
+import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,13 +46,13 @@ import java.util.List;
 public class Frag_add_category extends Fragment implements Adapter_Category_Admin.Callback {
     private FloatingActionButton btn_floatCategory;
     private EditText edt_nameCategory;
-    private EditText edt_idCategory;
     private ImageView img_category;
 
     private List<TheLoai> theLoaiList;
     private Adapter_Category_Admin adapter;
     private RecyclerView recyclerView;
     private TheLoai theLoai;
+    private int id = 0;
 
     @Nullable
     @Override
@@ -69,18 +71,10 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
             final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
             dialog.setContentView(R.layout.dialog_add_category);
             edt_nameCategory = dialog.findViewById(R.id.edt_nameCategory);
-            edt_idCategory = dialog.findViewById(R.id.edt_idCategory);
             img_category = dialog.findViewById(R.id.img_category);
             dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
                 String nameCategory = edt_nameCategory.getText().toString();
-                String idCategory = edt_idCategory.getText().toString();
                 int image = R.drawable.avatar;
-
-                if (idCategory.isEmpty()) {
-                    edt_idCategory.setError("ID Category is required");
-                    edt_idCategory.requestFocus();
-                    return;
-                }
 
 
                 if (nameCategory.isEmpty()) {
@@ -89,10 +83,10 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                     return;
                 }
 
-
-                theLoai = new TheLoai(idCategory, image, nameCategory);
+                id = id+1;
+                theLoai = new TheLoai(id, image, nameCategory);
                 FirebaseDatabase.getInstance().getReference("Categories")
-                        .child(idCategory)
+                        .child(String.valueOf(id))
                         .setValue(theLoai).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -156,7 +150,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 }
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
-
+                id = theLoaiList.size();
             }
 
             @Override
@@ -187,7 +181,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
 
             TheLoai theLoai1 = new TheLoai(theLoai.getId(), image, nameCategory);
             FirebaseDatabase.getInstance().getReference("Categories")
-                    .child(theLoai1.getId())
+                    .child(String.valueOf(theLoai1.getId()))
                     .setValue(theLoai1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
