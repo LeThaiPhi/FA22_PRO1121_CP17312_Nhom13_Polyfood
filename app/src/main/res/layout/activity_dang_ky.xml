@@ -61,6 +61,7 @@
         android:layout_marginTop="15dp"
         android:layout_height="60dp"
         android:hint="Phone No"
+        android:inputType="phone"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"

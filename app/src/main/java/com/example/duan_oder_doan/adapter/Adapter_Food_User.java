@@ -1,5 +1,8 @@
 package com.example.duan_oder_doan.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,23 +10,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan_oder_doan.HoaDonUser;
 import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.model.SanPham;
-import com.example.duan_oder_doan.view_holder.View_Holder_Food_Admin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Food_User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
-
 public class Adapter_Food_User extends RecyclerView.Adapter<View_Holder_Food_User> {
     private List<SanPham> sanPhamList;
-    private Callback callback;
 
-    public Adapter_Food_User(List<SanPham> sanPhamList, Callback callback) {
+    public Adapter_Food_User(List<SanPham> sanPhamList) {
         this.sanPhamList = sanPhamList;
-        this.callback = callback;
     }
 
     @NonNull
@@ -42,9 +41,14 @@ public class Adapter_Food_User extends RecyclerView.Adapter<View_Holder_Food_Use
 
         holder.tvNameFood.setText(sanPham.getName_product());
         holder.tvNoteFood.setText(sanPham.getNote_product());
-        holder.lineItemFood.setOnLongClickListener(v ->{
-            callback.open(sanPham);
-            return false;
+        holder.lineItemFood.setOnClickListener(v ->{
+            Intent myIntent = new Intent(v.getContext(), HoaDonUser.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("nameFood", sanPham.getName_product());
+            bundle.putString("noteFood", sanPham.getNote_product());
+            bundle.putString("priceFood", sanPham.getPrice_product());
+            myIntent.putExtra("food", bundle);
+            v.getContext().startActivity(myIntent);
         });
     }
 
@@ -56,4 +60,8 @@ public class Adapter_Food_User extends RecyclerView.Adapter<View_Holder_Food_Use
         void open(SanPham sanPham);
     }
 
+    public void filterList(ArrayList<SanPham> filteredList) {
+        sanPhamList = filteredList;
+        notifyDataSetChanged();
+    }
 }

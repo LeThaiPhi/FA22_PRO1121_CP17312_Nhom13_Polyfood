@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
@@ -47,8 +49,7 @@ public class GioiThieuUser extends AppCompatActivity {
     private TextView tv_gender;
     private TextView tv_dateofbirth;
 
-    private String name, email, pass, phone, gender, date_of_birth;
-    private int image;
+    private String name, email, pass, phone, gender, date_of_birth, image;
 
 
     @Override
@@ -67,7 +68,7 @@ public class GioiThieuUser extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
@@ -76,7 +77,7 @@ public class GioiThieuUser extends AppCompatActivity {
                     name = userProfile.getFullName();
                     tv_name.setText(""+name);
                     image = userProfile.getImage();
-                    img_avatar.setImageResource(image);
+                    Picasso.get().load(image).into(img_avatar);
                     email = userProfile.getEmail();
                     tv_email.setText(""+email);
                     pass = userProfile.getPassword();
@@ -182,6 +183,7 @@ public class GioiThieuUser extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("User")
                 .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -197,6 +199,7 @@ public class GioiThieuUser extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("User")
                 .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

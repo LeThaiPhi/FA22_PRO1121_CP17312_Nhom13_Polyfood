@@ -29,8 +29,7 @@ public class NameUser extends AppCompatActivity {
     private String userID;
 
     private EditText edt_name;
-    private String email,pass, phone, gender, date_of_birth;
-    private int image;
+    private String email,pass, phone, gender, date_of_birth, image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class NameUser extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
@@ -72,6 +71,7 @@ public class NameUser extends AppCompatActivity {
 
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("User")
                     .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -30,8 +30,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
     private EditText edt_currpass, edt_newpass, edt_pass;
     private FirebaseAuth mAuth;
 
-    private String name,email,password, phone, gender, date_of_birth;
-    private int image;
+    private String name,email,password, phone, gender, date_of_birth, image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
@@ -130,6 +129,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
                                 User userProfile1 = new User(name, email, phone, newpass, image, gender, date_of_birth);
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child("User")
                                         .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

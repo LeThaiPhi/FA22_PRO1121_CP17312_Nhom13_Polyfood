@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +76,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
@@ -82,8 +84,8 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
                 if (userProfile != null) {
                     String fullName = userProfile.getFullName();
                     tv_name.setText("Hi "+ fullName+"!");
-                    int image = userProfile.getImage();
-                    img_avatar.setImageResource(image);
+                    String image1 = userProfile.getImage();
+                    Picasso.get().load(image1).into(img_avatar);
                 }
             }
 

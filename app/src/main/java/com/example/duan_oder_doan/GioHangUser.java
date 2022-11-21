@@ -31,9 +31,9 @@ public class GioHangUser extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
                 if (position == 0) {
-                    tab.setText("Orders");
+                    tab.setText("Cart");
                 } else {
-                    tab.setText("History");
+                    tab.setText("Oder");
                 }
             }
         });

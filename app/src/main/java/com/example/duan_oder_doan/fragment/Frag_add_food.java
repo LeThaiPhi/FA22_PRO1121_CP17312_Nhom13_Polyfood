@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callback {
-    private EditText edt_idFood;
     private EditText edt_nameFood;
     private EditText edt_priceFood;
     private EditText edt_noteFood;
@@ -46,6 +45,8 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
     private Adapter_Food_Admin adapter;
     private RecyclerView recyclerView;
     private SanPham sanPham;
+
+    private int id = 0;
 
     @Nullable
     @Override
@@ -61,7 +62,6 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
         view.findViewById(R.id.floatFood).setOnClickListener(v -> {
             final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
             dialog.setContentView(R.layout.dialog_add_food);
-            edt_idFood = dialog.findViewById(R.id.edt_idFood);
             edt_nameFood = dialog.findViewById(R.id.edt_nameFood);
             edt_priceFood = dialog.findViewById(R.id.edt_priceFood);
             edt_noteFood = dialog.findViewById(R.id.edt_noteFood);
@@ -94,18 +94,12 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
 
             dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
                 String nameFood = edt_nameFood.getText().toString();
-                String idFood = edt_idFood.getText().toString();
                 String priceFood = edt_priceFood.getText().toString();
                 String note = edt_noteFood.getText().toString();
                 String category = spn_category.getSelectedItem().toString();
                 int image = R.drawable.avatar;
+                id = id+1;
 
-
-                if (idFood.isEmpty()) {
-                    edt_idFood.setError("ID Category is required");
-                    edt_idFood.requestFocus();
-                    return;
-                }
 
                 if (nameFood.isEmpty()) {
                     edt_nameFood.setError("Name Category is required");
@@ -119,9 +113,9 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                     return;
                 }
 
-                sanPham = new SanPham(idFood,category, image, nameFood, priceFood, note);
+                sanPham = new SanPham(id,category, image, nameFood, priceFood, note);
                 FirebaseDatabase.getInstance().getReference("Foods")
-                        .child(idFood)
+                        .child(String.valueOf(id))
                         .setValue(sanPham).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -181,6 +175,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                 }
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
+                id = sanPhamList.size();
 
             }
 
@@ -248,7 +243,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
 
             SanPham sanPham1 = new SanPham(sanPham.getId(), category, image, nameFood, priceFood, note);
             FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(sanPham1.getId())
+                    .child(String.valueOf(sanPham1.getId()))
                     .setValue(sanPham1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

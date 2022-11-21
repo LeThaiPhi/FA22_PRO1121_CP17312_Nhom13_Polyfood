@@ -5,18 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DangKy extends AppCompatActivity {
     private EditText edt_name;
@@ -25,6 +34,7 @@ public class DangKy extends AppCompatActivity {
     private EditText edt_pass;
     private TextView tv_login;
     private FirebaseAuth mAuth;
+    public String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +65,7 @@ public class DangKy extends AppCompatActivity {
         String email = edt_email.getText().toString();
         String phone = edt_phone.getText().toString();
         String password = edt_pass.getText().toString();
-        int image = R.drawable.avatar;
+        String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
         String gender = "";
         String date_of_birth = "";
 
@@ -93,7 +103,6 @@ public class DangKy extends AppCompatActivity {
             edt_pass.requestFocus();
             return;
         }
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -102,6 +111,7 @@ public class DangKy extends AppCompatActivity {
                             User user = new User(fullName, email,  phone, password, image, gender, date_of_birth);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("User")
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -118,5 +128,6 @@ public class DangKy extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 }

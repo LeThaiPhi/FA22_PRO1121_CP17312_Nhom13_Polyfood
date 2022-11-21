@@ -8,6 +8,7 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,7 +49,7 @@ public class ThongTinUser extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
@@ -55,8 +57,8 @@ public class ThongTinUser extends AppCompatActivity {
                 if (userProfile != null) {
                     String fullName = userProfile.getFullName();
                     tv_name.setText(""+fullName);
-                    int image = userProfile.getImage();
-                    img_avatar.setImageResource(image);
+                    String image1 = userProfile.getImage();
+                    Picasso.get().load(image1).into(img_avatar);
                 }
             }
 
