@@ -113,6 +113,9 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                     return;
                 }
 
+                sanPhamList.clear();
+                adapter.notifyDataSetChanged();
+
                 sanPham = new SanPham(id,category, image, nameFood, priceFood, note);
                 FirebaseDatabase.getInstance().getReference("Foods")
                         .child(String.valueOf(id))
@@ -240,6 +243,9 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                 edt_priceFood.requestFocus();
                 return;
             }
+
+            sanPhamList.clear();
+            adapter.notifyDataSetChanged();
 
             SanPham sanPham1 = new SanPham(sanPham.getId(), category, image, nameFood, priceFood, note);
             FirebaseDatabase.getInstance().getReference("Foods")

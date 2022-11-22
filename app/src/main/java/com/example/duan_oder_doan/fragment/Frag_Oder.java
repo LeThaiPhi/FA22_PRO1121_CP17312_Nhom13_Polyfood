@@ -45,6 +45,7 @@ public class Frag_Oder extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.rcv_oder);
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
         hoaDonChiTietList = new ArrayList<>();
@@ -53,6 +54,8 @@ public class Frag_Oder extends Fragment {
     }
 
     private void getList(){
+        hoaDonChiTietList.clear();
+        adapter.notifyDataSetChanged();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Users");
 

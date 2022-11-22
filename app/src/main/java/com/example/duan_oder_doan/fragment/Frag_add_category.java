@@ -76,13 +76,13 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 String nameCategory = edt_nameCategory.getText().toString();
                 int image = R.drawable.avatar;
 
-
                 if (nameCategory.isEmpty()) {
                     edt_nameCategory.setError("Name Category is required");
                     edt_nameCategory.requestFocus();
                     return;
                 }
-
+                theLoaiList.clear();
+                adapter.notifyDataSetChanged();
                 id = id+1;
                 theLoai = new TheLoai(id, image, nameCategory);
                 FirebaseDatabase.getInstance().getReference("Categories")
@@ -138,6 +138,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
     }
 
     private void getList(){
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Categories");
 
@@ -172,12 +173,16 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
         dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
             String nameCategory = edt_nameCategoryUpdate.getText().toString();
             int image = R.drawable.avatar;
+            theLoaiList.clear();
+            adapter.notifyDataSetChanged();
 
             if (nameCategory.isEmpty()) {
                 edt_nameCategoryUpdate.setError("Name Category is required");
                 edt_nameCategoryUpdate.requestFocus();
                 return;
             }
+
+
 
             TheLoai theLoai1 = new TheLoai(theLoai.getId(), image, nameCategory);
             FirebaseDatabase.getInstance().getReference("Categories")
@@ -191,6 +196,8 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                             }
                         }
                     });
+
+
         });
         dialog.show();
     }
