@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.GioHangUser;
 import com.example.duan_oder_doan.R;
+import com.example.duan_oder_doan.adapter.Adapter_Detailed_Invoice_User;
 import com.example.duan_oder_doan.adapter.Adapter_Receipt_User;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
@@ -99,7 +100,6 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
         });
 
         view.findViewById(R.id.line_checkout).setOnClickListener(v ->{
-
             if (address.length()<1) {
                 Toast.makeText(getContext(), "Add address!", Toast.LENGTH_LONG).show();
                 return;
@@ -107,7 +107,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
             id = id+1;
             id1 = id1+1;
             String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id, mydate, tv_sumPrice.getText().toString(),name, phone,address);
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id1, mydate, tv_sumPrice.getText().toString(),name, phone,address);
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Detailed_Invoice")
@@ -120,10 +120,10 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                                 DatabaseReference reference = database.getReference("Users");
                                 reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .child("Receipt").removeValue();
-                                Toast.makeText(getContext(), "Order successfully!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getContext(), GioHangUser.class);
-                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
-                                startActivity(intent, bundle);
+                                hoaDonList.clear();
+                                adapter.notifyDataSetChanged();
+                                sum =0;
+
                             }
                         }
                     });
@@ -183,7 +183,6 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 tv_sumPrice.setText(String.valueOf(sum));
-
             }
 
             @Override
@@ -214,6 +213,9 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
 
     @Override
     public void up(HoaDon hoaDon) {
+        hoaDonList.clear();
+        adapter.notifyDataSetChanged();
+        sum = 0;
         number = Integer.parseInt(hoaDon.getQuantity_Food());
         number = number+1;
         String quantity = String.valueOf(number);
@@ -226,17 +228,17 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(getContext(), GioHangUser.class);
-                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
-                            startActivity(intent, bundle);
                         }
                     }
                 });
-
     }
 
     @Override
     public void down(HoaDon hoaDon) {
+        hoaDonList.clear();
+        adapter.notifyDataSetChanged();
+        sum = 0;
+        tv_sumPrice.setText(String.valueOf(sum));
         number = Integer.parseInt(hoaDon.getQuantity_Food());
         if (number >1) {
             number = number-1;
@@ -251,9 +253,6 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(getContext(), GioHangUser.class);
-                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
-                                startActivity(intent, bundle);
                             }
                         }
                     });

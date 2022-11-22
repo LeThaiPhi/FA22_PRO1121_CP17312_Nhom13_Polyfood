@@ -3,6 +3,7 @@ package com.example.duan_oder_doan.adapter;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,12 +65,24 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
             tv_date.setText("Date: "+ hoaDonChiTietAdmin.getDate());
             tv_sum.setText("Sum: $ "+ hoaDonChiTietAdmin.getSum_Price());
 
+            tv_phone.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Intent i = new Intent(Intent.ACTION_CALL);
+                    i.setData(Uri.parse("tel:"+hoaDonChiTietAdmin.getPhone()));
+                    dialog.getContext().startActivity(i);
+                    return false;
+                }
+            });
+
             dialog.show();
         });
 
         holder.tvStatus.setText(hoaDonChiTietAdmin.getStatus());
         if (holder.tvStatus.getText().toString().equals("Confirm")) {
             holder.tvStatus.setOnClickListener(v ->{
+                hoaDonChiTietAdminList.clear();
+                notifyDataSetChanged();
                 String status = "Doing";
                 HoaDonChiTietAdmin hoaDonChiTietAdmin1 = new HoaDonChiTietAdmin(hoaDonChiTietAdmin.getId(), hoaDonChiTietAdmin.getDate(), hoaDonChiTietAdmin.getSum_Price(), hoaDonChiTietAdmin.getName(), hoaDonChiTietAdmin.getPhone(), hoaDonChiTietAdmin.getAddress(), status);
                 FirebaseDatabase.getInstance().getReference("Detailed_Invoices")
@@ -87,9 +100,13 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
             });
         }
         if (holder.tvStatus.getText().toString().equals("Doing")) {
+            hoaDonChiTietAdminList.clear();
+            notifyDataSetChanged();
             holder.tvStatus.setVisibility(View.INVISIBLE);
         }
         if (holder.tvStatus.getText().toString().equals("Done")) {
+            hoaDonChiTietAdminList.clear();
+            notifyDataSetChanged();
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }
