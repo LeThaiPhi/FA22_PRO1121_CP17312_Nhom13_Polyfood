@@ -9,21 +9,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.GioHangUser;
 import com.example.duan_oder_doan.OdersManageActivity;
 import com.example.duan_oder_doan.R;
+import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDonChiTietAdmin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Detailed_Invoice_Admin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Detailed_Invoice_User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Holder_Detailed_Invoice_Admin> {
@@ -65,12 +74,38 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
             tv_date.setText("Date: "+ hoaDonChiTietAdmin.getDate());
             tv_sum.setText("Sum: $ "+ hoaDonChiTietAdmin.getSum_Price());
 
+            RecyclerView recyclerView = dialog.findViewById(R.id.rcv_detailed_invoice);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(v.getContext(), DividerItemDecoration.VERTICAL);
+            recyclerView.addItemDecoration(dividerItemDecoration);
+            List<HoaDon> hoaDonList = new ArrayList<>();
+            Adapter_Detailed_Invoice_Food adapter = new Adapter_Detailed_Invoice_Food(hoaDonList);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference("Users");
+
+            reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("Receipt").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                HoaDon hoaDon = dataSnapshot.getValue(HoaDon.class);
+                                hoaDonList.add(hoaDon);
+                            }
+                            adapter.notifyDataSetChanged();
+                            recyclerView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(v.getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
             tv_phone.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent i = new Intent(Intent.ACTION_CALL);
                     i.setData(Uri.parse("tel:"+hoaDonChiTietAdmin.getPhone()));
-                    dialog.getContext().startActivity(i);
+                    v.getContext().startActivity(i);
                     return false;
                 }
             });
@@ -81,9 +116,9 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
         holder.tvStatus.setText(hoaDonChiTietAdmin.getStatus());
         if (holder.tvStatus.getText().toString().equals("Confirm")) {
             holder.tvStatus.setOnClickListener(v ->{
+                String status = "Doing";
                 hoaDonChiTietAdminList.clear();
                 notifyDataSetChanged();
-                String status = "Doing";
                 HoaDonChiTietAdmin hoaDonChiTietAdmin1 = new HoaDonChiTietAdmin(hoaDonChiTietAdmin.getId(), hoaDonChiTietAdmin.getDate(), hoaDonChiTietAdmin.getSum_Price(), hoaDonChiTietAdmin.getName(), hoaDonChiTietAdmin.getPhone(), hoaDonChiTietAdmin.getAddress(), status);
                 FirebaseDatabase.getInstance().getReference("Detailed_Invoices")
                         .child(String.valueOf(hoaDonChiTietAdmin.getId()))
@@ -91,8 +126,6 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Intent intent = new Intent(v.getContext(), OdersManageActivity.class);
-                                    v.getContext().startActivity(intent);
                                 }
                             }
                         });
@@ -100,13 +133,9 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
             });
         }
         if (holder.tvStatus.getText().toString().equals("Doing")) {
-            hoaDonChiTietAdminList.clear();
-            notifyDataSetChanged();
             holder.tvStatus.setVisibility(View.INVISIBLE);
         }
         if (holder.tvStatus.getText().toString().equals("Done")) {
-            hoaDonChiTietAdminList.clear();
-            notifyDataSetChanged();
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }

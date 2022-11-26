@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.R;
@@ -75,10 +77,13 @@ public class Adapter_Detailed_Invoice_User extends RecyclerView.Adapter<View_Hol
             tv_sum.setText("Sum: $ "+ hoaDonChiTiet.getSum_Price());
 
             RecyclerView recyclerView = dialog.findViewById(R.id.rcv_detailed_invoice);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(v.getContext(), DividerItemDecoration.VERTICAL);
+            recyclerView.addItemDecoration(dividerItemDecoration);
             List<HoaDon> hoaDonList = new ArrayList<>();
-            Adapter_Food_HoaDonChiTiet adapter = new Adapter_Food_HoaDonChiTiet(hoaDonList);
+            Adapter_Detailed_Invoice_Food adapter = new Adapter_Detailed_Invoice_Food(hoaDonList);
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference reference = database.getReference("Users");
+
             reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Receipt").addValueEventListener(new ValueEventListener() {
                         @Override
@@ -89,12 +94,11 @@ public class Adapter_Detailed_Invoice_User extends RecyclerView.Adapter<View_Hol
                             }
                             adapter.notifyDataSetChanged();
                             recyclerView.setAdapter(adapter);
-
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(dialog.getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(v.getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
                         }
                     });
 

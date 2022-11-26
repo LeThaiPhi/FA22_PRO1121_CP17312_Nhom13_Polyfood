@@ -46,8 +46,6 @@ public class OdersManageActivity extends AppCompatActivity {
         hoaDonChiTietAdminList = new ArrayList<>();
         adapter = new Adapter_Detailed_Invoice_Admin(hoaDonChiTietAdminList);
         getList();
-
-
         findViewById(R.id.tv_closing).setOnClickListener(v ->{
 
         });
