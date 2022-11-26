@@ -116,10 +116,10 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                DatabaseReference reference = database.getReference("Users");
-                                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .child("Receipt").removeValue();
+//                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                                DatabaseReference reference = database.getReference("Users");
+//                                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                        .child("Receipt").removeValue();
                                 hoaDonList.clear();
                                 adapter.notifyDataSetChanged();
                                 sum =0;
