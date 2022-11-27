@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn_Oder_DoAn"
         tools:targetApi="31">
+        <activity
+            android:name=".ThongBao"
+            android:exported="false"
+            android:parentActivityName=".TrangChuUser"/>
         <activity
             android:name=".HoaDonUser"
             android:exported="false" />
@@ -40,7 +44,7 @@
         <activity
             android:name=".OdersManageActivity"
             android:exported="false"
-            android:parentActivityName=".TrangChuManage"/>
+            android:parentActivityName=".TrangChuManage" />
         <activity
             android:name=".XacNhanPass_Email"
             android:exported="false"

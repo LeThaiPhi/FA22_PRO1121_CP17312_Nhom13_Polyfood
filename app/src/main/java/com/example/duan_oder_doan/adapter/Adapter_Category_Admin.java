@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_Admin;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class Adapter_Category_Admin extends RecyclerView.Adapter<View_Holder_Cat
         TheLoai theLoai = theLoaiList.get(position);
 
         holder.tvNameCategory.setText(theLoai.getId()+". "+theLoai.getName_category());
-        holder.imgCategory.setImageResource(theLoai.getImg_category());
+        Picasso.get().load(theLoai.getImg_category()).into(holder.imgCategory);
         holder.imgUpdate.setOnClickListener(v ->{
             callback.update(theLoai);
         });

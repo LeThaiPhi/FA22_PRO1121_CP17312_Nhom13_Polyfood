@@ -3,6 +3,7 @@ package com.example.duan_oder_doan.fragment;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +33,10 @@ import com.example.duan_oder_doan.adapter.Adapter_Category_Admin;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.model.User;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,14 +46,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Frag_add_category extends Fragment implements Adapter_Category_Admin.Callback {
     private FloatingActionButton btn_floatCategory;
-    private EditText edt_nameCategory;
-    private ImageView img_category;
+    private EditText edt_nameCategory,edt_nameCategoryUpdate;
+    private ImageView img_category, img_categoryUpdate;
+    private ActivityResultLauncher<String> launcher;
+    private ActivityResultLauncher<String> launcher1;
+    private FirebaseStorage storage;
 
     private List<TheLoai> theLoaiList;
     private Adapter_Category_Admin adapter;
@@ -66,15 +80,32 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
 
         recyclerView = view.findViewById(R.id.rcv_category);
         btn_floatCategory = view.findViewById(R.id.floatCategory);
+        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                img_category.setImageURI(result);
+            }
+        });
+        launcher1 = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                img_categoryUpdate.setImageURI(result);
+            }
+        });
 
         btn_floatCategory.setOnClickListener(v -> {
             final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
             dialog.setContentView(R.layout.dialog_add_category);
             edt_nameCategory = dialog.findViewById(R.id.edt_nameCategory);
             img_category = dialog.findViewById(R.id.img_category);
+            dialog.findViewById(R.id.btn_imgcategory).setOnClickListener(v1 ->{
+                launcher.launch("image/*");
+            });
+            String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
+            Picasso.get().load(image).into(img_category);
+
             dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
                 String nameCategory = edt_nameCategory.getText().toString();
-                int image = R.drawable.avatar;
 
                 if (nameCategory.isEmpty()) {
                     edt_nameCategory.setError("Name Category is required");
@@ -165,14 +196,18 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
     public void update(TheLoai theLoai) {
         final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.setContentView(R.layout.dialog_update_category);
-        EditText edt_nameCategoryUpdate = dialog.findViewById(R.id.edt_nameCategoryUpdate);
-        ImageView img_categoryUpdate = dialog.findViewById(R.id.img_categoryUpdate);
+        edt_nameCategoryUpdate = dialog.findViewById(R.id.edt_nameCategoryUpdate);
+        img_categoryUpdate = dialog.findViewById(R.id.img_categoryUpdate);
 
         edt_nameCategoryUpdate.setText(theLoai.getName_category());
-        img_categoryUpdate.setImageResource(theLoai.getImg_category());
+        Picasso.get().load(theLoai.getImg_category()).into(img_categoryUpdate);
+        dialog.findViewById(R.id.btn_imgcategoryUpdate).setOnClickListener(v1 ->{
+            launcher1.launch("image/*");
+        });
+
         dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
             String nameCategory = edt_nameCategoryUpdate.getText().toString();
-            int image = R.drawable.avatar;
+
             theLoaiList.clear();
             adapter.notifyDataSetChanged();
 
@@ -182,9 +217,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 return;
             }
 
-
-
-            TheLoai theLoai1 = new TheLoai(theLoai.getId(), image, nameCategory);
+            TheLoai theLoai1 = new TheLoai(theLoai.getId(), theLoai.getImg_category(), nameCategory);
             FirebaseDatabase.getInstance().getReference("Categories")
                     .child(String.valueOf(theLoai1.getId()))
                     .setValue(theLoai1).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,6 +1,7 @@
 package com.example.duan_oder_doan.fragment;
 
 import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +44,10 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
     private EditText edt_priceFood;
     private EditText edt_noteFood;
     private Spinner spn_category;
-    private ImageView img_food;
+    private ImageView img_food, img_foodUpdate;
+
+    private ActivityResultLauncher<String> launcher;
+    private ActivityResultLauncher<String> launcher1;
 
     private List<SanPham> sanPhamList;
     private Adapter_Food_Admin adapter;
@@ -58,6 +66,18 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rcv_food);
+        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                img_food.setImageURI(result);
+            }
+        });
+        launcher1 = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                img_foodUpdate.setImageURI(result);
+            }
+        });
 
         view.findViewById(R.id.floatFood).setOnClickListener(v -> {
             final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
@@ -67,6 +87,13 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
             edt_noteFood = dialog.findViewById(R.id.edt_noteFood);
             spn_category = dialog.findViewById(R.id.spn_category);
             img_food = dialog.findViewById(R.id.img_food);
+
+            String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
+            Picasso.get().load(image).into(img_food);
+
+            dialog.findViewById(R.id.btn_imgfood).setOnClickListener(v1 ->{
+                launcher.launch("image/*");
+            });
 
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -97,7 +124,6 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                 String priceFood = edt_priceFood.getText().toString();
                 String note = edt_noteFood.getText().toString();
                 String category = spn_category.getSelectedItem().toString();
-                int image = R.drawable.avatar;
                 id = id+1;
 
 
@@ -197,12 +223,12 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
         EditText edt_priceFoodUpdate = dialog.findViewById(R.id.edt_priceFoodUpdate);
         EditText edt_noteFoodUpdate = dialog.findViewById(R.id.edt_noteFoodUpdate);
         Spinner spn_categoryUpdate = dialog.findViewById(R.id.spn_categoryUpdate);
-        ImageView img_foodUpdate = dialog.findViewById(R.id.img_foodUpdate);
+        img_foodUpdate = dialog.findViewById(R.id.img_foodUpdate);
 
         edt_nameFoodUpdate.setText(sanPham.getName_product());
         edt_priceFoodUpdate.setText(sanPham.getPrice_product());
         edt_noteFoodUpdate.setText(sanPham.getNote_product());
-        img_foodUpdate.setImageResource(sanPham.getImg_product());
+        Picasso.get().load(sanPham.getImg_product()).into(img_foodUpdate);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Categories");
@@ -230,7 +256,6 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
             String priceFood = edt_priceFoodUpdate.getText().toString();
             String note = edt_noteFoodUpdate.getText().toString();
             String category = spn_categoryUpdate.getSelectedItem().toString();
-            int image = R.drawable.avatar;
 
             if (nameFood.isEmpty()) {
                 edt_nameFood.setError("Name Category is required");
@@ -247,7 +272,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
             sanPhamList.clear();
             adapter.notifyDataSetChanged();
 
-            SanPham sanPham1 = new SanPham(sanPham.getId(), category, image, nameFood, priceFood, note);
+            SanPham sanPham1 = new SanPham(sanPham.getId(), category, sanPham.getImg_product(), nameFood, priceFood, note);
             FirebaseDatabase.getInstance().getReference("Foods")
                     .child(String.valueOf(sanPham1.getId()))
                     .setValue(sanPham1).addOnCompleteListener(new OnCompleteListener<Void>() {

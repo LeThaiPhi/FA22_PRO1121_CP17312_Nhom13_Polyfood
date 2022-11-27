@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/line_itemFood"
-    android:layout_marginBottom="30dp">
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="0dp"

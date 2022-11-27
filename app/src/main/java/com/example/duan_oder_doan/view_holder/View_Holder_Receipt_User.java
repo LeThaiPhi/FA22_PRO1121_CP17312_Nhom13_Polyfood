@@ -14,6 +14,7 @@ public class View_Holder_Receipt_User extends RecyclerView.ViewHolder {
     public TextView tvNameFood;
     public TextView tvNoteFood;
     public TextView tvPriceFood;
+    public ImageView imgItemFood;
     public ImageView imgDown;
     public TextView tvQuantityFood;
     public ImageView imgUp;
@@ -23,6 +24,7 @@ public class View_Holder_Receipt_User extends RecyclerView.ViewHolder {
 
         tvNameFood = (TextView) itemView.findViewById(R.id.tv_nameFood);
         tvNoteFood = (TextView) itemView.findViewById(R.id.tv_noteFood);
+        imgItemFood = (ImageView) itemView.findViewById(R.id.img_itemFood);
         tvPriceFood = (TextView) itemView.findViewById(R.id.tv_priceFood);
         imgDown = (ImageView) itemView.findViewById(R.id.img_down);
         tvQuantityFood = (TextView) itemView.findViewById(R.id.tv_quantityFood);

@@ -12,6 +12,7 @@ import com.example.duan_oder_doan.model.SanPham;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_Admin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Food_Admin;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class Adapter_Food_Admin extends RecyclerView.Adapter<View_Holder_Food_Ad
         holder.tvPriceFood.setText(sanPham.getPrice_product());
         holder.tvCategoryFood.setText(sanPham.getCategory());
         holder.tvNoteFood.setText(sanPham.getNote_product());
+        Picasso.get().load(sanPham.getImg_product()).into(holder.imgItemFood);
         holder.lineItemFood.setOnLongClickListener(v ->{
             callback.update(sanPham);
             return false;

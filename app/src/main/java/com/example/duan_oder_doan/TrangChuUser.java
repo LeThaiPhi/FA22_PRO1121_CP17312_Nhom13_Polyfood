@@ -111,7 +111,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
         });
 
         viewPager2 = findViewById(R.id.viewpager2_thongbao);
-        pagerAdapterThongBao = new PagerAdapter_ThongBao(images );
+        pagerAdapterThongBao = new PagerAdapter_ThongBao(images);
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(3);

@@ -65,7 +65,7 @@ public class DangKy extends AppCompatActivity {
         String email = edt_email.getText().toString();
         String phone = edt_phone.getText().toString();
         String password = edt_pass.getText().toString();
-        String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
+        String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/avatar.png?alt=media&token=021e12e4-2ee4-4c37-a803-b901c6552141";
         String gender = "";
         String date_of_birth = "";
 

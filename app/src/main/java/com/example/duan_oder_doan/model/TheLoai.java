@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 public class TheLoai {
     private int id;
-    private int img_category;
+    private String img_category;
     private String name_category;
 
     public TheLoai() {
     }
 
-    public TheLoai(int id, int img_category, String name_category) {
+    public TheLoai(int id, String img_category, String name_category) {
         this.id = id;
         this.img_category = img_category;
         this.name_category = name_category;
@@ -24,11 +24,11 @@ public class TheLoai {
         this.id = id;
     }
 
-    public int getImg_category() {
+    public String getImg_category() {
         return img_category;
     }
 
-    public void setImg_category(int img_category) {
+    public void setImg_category(String img_category) {
         this.img_category = img_category;
     }
 
