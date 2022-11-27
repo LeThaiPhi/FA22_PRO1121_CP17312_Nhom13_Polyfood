@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="105dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Delicious Taste. Fast Food Delivery"
+        android:text="Hello !!!"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -44,8 +44,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/ivfill"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/tenor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+
+        <LinearLayout
         android:id="@+id/layout_mhc2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -56,12 +69,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_marginTop="20dp"
-            android:id="@+id/img_mhc4"
-            android:layout_width="280dp"
+            android:id="@+id/ivLogo"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/mhc6"/>
+            android:layout_margin="8dp"
+            android:src="@mipmap/gif_doan" />
 
         <LinearLayout
             android:layout_width="match_parent"
