@@ -1,5 +1,8 @@
 package com.example.duan_oder_doan.adapter;
 
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.R;
+import com.example.duan_oder_doan.ThongBao;
 
 import javax.security.auth.callback.Callback;
 
@@ -29,6 +33,13 @@ public class PagerAdapter_ThongBao extends RecyclerView.Adapter<PagerAdapter_Tho
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.img_thongbao.setBackgroundResource(images[position]);
+        holder.img_thongbao.setOnClickListener(v ->{
+            Intent intent = new Intent(v.getContext(), ThongBao.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("image", images[position]);
+            intent.putExtra("bundle", bundle);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

@@ -31,6 +31,7 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/hinhtron.xml" value="0.1595" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_add.xml" value="0.161" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_add_24_1.xml" value="0.1515" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_add_home_work_24.xml" value="0.1485" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1625" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_brightness_1_24.xml" value="0.171" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.171" />
@@ -72,6 +73,7 @@
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_phone_user.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_statistical_manage.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_the_loai_user.xml" value="0.2" />
+        <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_thong_bao.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_thong_ke_user.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_thong_tin_user.xml" value="0.25" />
         <entry key="..\:/Users/DeLL/AndroidStudioProjects/DuAn_Oder_DoAn/app/src/main/res/layout/activity_tim_kiem_food.xml" value="0.20521590423257802" />

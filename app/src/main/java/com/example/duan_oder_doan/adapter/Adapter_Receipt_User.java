@@ -13,6 +13,7 @@ import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.SanPham;
 import com.example.duan_oder_doan.view_holder.View_Holder_Food_User;
 import com.example.duan_oder_doan.view_holder.View_Holder_Receipt_User;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class Adapter_Receipt_User extends RecyclerView.Adapter<View_Holder_Recei
         holder.tvNoteFood.setText(hoaDon.getNote_Food());
         holder.tvPriceFood.setText(hoaDon.getPrice_Food());
         holder.tvQuantityFood.setText(hoaDon.getQuantity_Food());
+        Picasso.get().load(hoaDon.getImg_Food()).into(holder.imgItemFood);
 
         holder.imgUp.setOnClickListener(v ->{
             callback.up(hoaDon);

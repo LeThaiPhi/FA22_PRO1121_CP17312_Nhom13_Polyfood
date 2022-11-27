@@ -7,13 +7,10 @@
     tools:context=".HoaDonUser">
 
     <ImageView
-        android:orientation="vertical"
         android:id="@+id/img_food"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/mhc5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mhc5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -21,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border6"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#E8E8E8"
         android:padding="10dp"
         android:src="@drawable/ic_baseline_local_grocery_store_24_1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border6"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#E8E8E8"
         android:padding="10dp"
         android:src="@drawable/ic_baseline_close_24"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -137,13 +134,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Introduce"
+            android:text="Ingredient"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp">
 
             <TextView

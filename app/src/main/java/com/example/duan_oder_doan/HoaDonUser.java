@@ -7,6 +7,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.List;
 public class HoaDonUser extends AppCompatActivity {
 
     private TextView tv_nameFood, tv_noteFood, tv_priceFood, tv_quantityFood, tv_countQuantity;
+    private ImageView img_food;
     private EditText edt_note;
     private List<HoaDon> hoaDonList = new ArrayList<>();
     private int number=1;
@@ -53,12 +56,15 @@ public class HoaDonUser extends AppCompatActivity {
         tv_quantityFood = findViewById(R.id.tv_quantityFood);
         tv_countQuantity = findViewById(R.id.tv_countQuantity);
         edt_note = findViewById(R.id.edt_note);
+        img_food = findViewById(R.id.img_food);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("food");
         tv_nameFood.setText(bundle.getString("nameFood"));
         tv_noteFood.setText(bundle.getString("noteFood"));
         tv_priceFood.setText(bundle.getString("priceFood"));
+        String imgFood = bundle.getString("imgFood");
+        Picasso.get().load(imgFood).into(img_food);
         tv_quantityFood.setText(String.valueOf(number));
 
         findViewById(R.id.img_up).setOnClickListener(v ->{
@@ -73,7 +79,7 @@ public class HoaDonUser extends AppCompatActivity {
         });
         findViewById(R.id.line_addtoCart).setOnClickListener(v ->{
             id = id+1;
-            HoaDon hoaDon = new HoaDon(id,tv_nameFood.getText().toString(), tv_priceFood.getText().toString(), tv_quantityFood.getText().toString(), edt_note.getText().toString());
+            HoaDon hoaDon = new HoaDon(id, imgFood, tv_nameFood.getText().toString(), tv_priceFood.getText().toString(), tv_quantityFood.getText().toString(), edt_note.getText().toString());
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Receipt")

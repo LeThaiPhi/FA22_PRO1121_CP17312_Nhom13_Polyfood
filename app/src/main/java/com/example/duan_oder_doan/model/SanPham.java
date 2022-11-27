@@ -3,7 +3,7 @@ package com.example.duan_oder_doan.model;
 public class SanPham {
     private int id;
     private String category;
-    private int img_product;
+    private String img_product;
     private String name_product;
     private String price_product;
     private String note_product;
@@ -11,7 +11,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(int id, String category, int img_product, String name_product, String price_product, String note_product) {
+    public SanPham(int id, String category, String img_product, String name_product, String price_product, String note_product) {
         this.id = id;
         this.category = category;
         this.img_product = img_product;
@@ -36,11 +36,11 @@ public class SanPham {
         this.id = id;
     }
 
-    public int getImg_product() {
+    public String getImg_product() {
         return img_product;
     }
 
-    public void setImg_product(int img_product) {
+    public void setImg_product(String img_product) {
         this.img_product = img_product;
     }
 

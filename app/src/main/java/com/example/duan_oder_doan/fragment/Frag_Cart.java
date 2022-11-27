@@ -219,7 +219,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
         number = Integer.parseInt(hoaDon.getQuantity_Food());
         number = number+1;
         String quantity = String.valueOf(number);
-        HoaDon hoaDon1 = new HoaDon(hoaDon.getId(), hoaDon.getName_Food(), hoaDon.getPrice_Food(), quantity, hoaDon.getNote_Food());
+        HoaDon hoaDon1 = new HoaDon(hoaDon.getId(),hoaDon.getImg_Food(), hoaDon.getName_Food(), hoaDon.getPrice_Food(), quantity, hoaDon.getNote_Food());
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child("Receipt")
@@ -244,7 +244,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
             number = number-1;
             String quantity = String.valueOf(number);
 
-            HoaDon hoaDon1 = new HoaDon(hoaDon.getId(), hoaDon.getName_Food(), hoaDon.getPrice_Food(), quantity, hoaDon.getNote_Food());
+            HoaDon hoaDon1 = new HoaDon(hoaDon.getId(), hoaDon.getImg_Food(), hoaDon.getName_Food(), hoaDon.getPrice_Food(), quantity, hoaDon.getNote_Food());
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Receipt")

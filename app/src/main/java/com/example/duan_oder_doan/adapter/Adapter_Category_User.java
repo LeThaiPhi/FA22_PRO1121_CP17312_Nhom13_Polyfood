@@ -11,6 +11,7 @@ import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_Admin;
 import com.example.duan_oder_doan.view_holder.View_Holder_Category_User;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class Adapter_Category_User extends RecyclerView.Adapter<View_Holder_Cate
         TheLoai theLoai = theLoaiList.get(position);
 
         holder.tvNameCategory.setText(theLoai.getName_category());
-        holder.imgCategory.setImageResource(theLoai.getImg_category());
+        Picasso.get().load(theLoai.getImg_category()).into(holder.imgCategory);
         holder.lineItemCategory.setOnClickListener(v ->{
             callback.open(theLoai);
         });

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -30,7 +31,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.duan_oder_doan.model.User;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,7 +63,6 @@ public class AvatarUser extends AppCompatActivity {
 
     private CircleImageView img_avatar;
     private String name, email, pass, phone, gender, date_of_birth, image;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +81,8 @@ public class AvatarUser extends AppCompatActivity {
                 User userProfile = snapshot.getValue(User.class);
 
                 if (userProfile != null) {
-                    String image1 = userProfile.getImage();
-                    Picasso.get().load(image1).into(img_avatar);
+                    image = userProfile.getImage();
+                    Picasso.get().load(image).into(img_avatar);
                     email = userProfile.getEmail();
                     pass = userProfile.getPassword();
                     name = userProfile.getFullName();
@@ -119,20 +121,24 @@ public class AvatarUser extends AppCompatActivity {
             public void onActivityResult(Uri result) {
                 img_avatar.setImageURI(result);
 
-                final StorageReference reference = storage.getReference().child("Images");
-                reference.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                if(uri != null){
-                                    image = uri.toString();
-                                }
-                            }
-                        });
-                    }
-                });
+//                final StorageReference reference = storage.getReference("Images_User")
+//                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                reference.putFile(result)
+//                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+//                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//                                        final String downloadUrl = uri.toString();
+//                                        image1 = downloadUrl;
+//                                    }
+//                                });
+//
+//                            }
+//                        });
+
             }
         });
 
@@ -173,26 +179,10 @@ public class AvatarUser extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //chụp ảnh
         if (requestCode == 1111) {
             Bitmap b = (Bitmap) data.getExtras().get("data");
             img_avatar.setImageBitmap(b);
         }
 
-        //lấy ảnh
-//        if (requestCode == 999) {
-//            try {
-//                final Uri imageUri = data.getData();
-//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-//                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-//                img_avatar.setImageBitmap(selectedImage);
-//
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
-//            }
-//
-//
-//        }
     }
 }
