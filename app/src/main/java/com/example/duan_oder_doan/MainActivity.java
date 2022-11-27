@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,11 +22,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView tvfill = findViewById(R.id.ivfill);
+        Glide.with(this).load(R.mipmap.tenor).into(tvfill);
+
+        ImageView tvLogo = findViewById(R.id.ivLogo);
+        Glide.with(this).load(R.mipmap.gif_doan).into(tvLogo);
+
         ImageView img_mhc1 = findViewById(R.id.img_mhc1);
         TextView tv_mhc = findViewById(R.id.tv_mhc);
         ImageView img_mhc2 = findViewById(R.id.img_mhc2);
         LinearLayout layout_mhc2 = findViewById(R.id.layout_mhc2);
-        ImageView img_mhc4 = findViewById(R.id.img_mhc4);
         TextView tv_mhc1 = findViewById(R.id.tv_mhc1);
         TextView tv_mhc2 = findViewById(R.id.tv_mhc2);
         LinearLayout layout_mhc3 = findViewById(R.id.layout_mhc3);
@@ -42,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         layout_mhc2.startAnimation(animation4);
 
         Animation animation5 = AnimationUtils.loadAnimation(this,R.anim.animation5);
-        img_mhc4.startAnimation(animation5);
         tv_mhc1.startAnimation(animation5);
         tv_mhc2.startAnimation(animation5);
 
