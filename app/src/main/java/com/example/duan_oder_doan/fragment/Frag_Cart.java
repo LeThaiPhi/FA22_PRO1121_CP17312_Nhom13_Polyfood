@@ -20,6 +20,7 @@ import com.example.duan_oder_doan.GioHangUser;
 import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.adapter.Adapter_Detailed_Invoice_User;
 import com.example.duan_oder_doan.adapter.Adapter_Receipt_User;
+import com.example.duan_oder_doan.model.Food_HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDonChiTietAdmin;
@@ -50,6 +51,9 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
     private int number=0;
     private String name = "";
     private String phone = "";
+    private String namefood = "";
+    private String quantity = "";
+    private String note = "";
     private String address = "";
     private List<HoaDonChiTiet> hoaDonChiTietList = new ArrayList<>();
 
@@ -107,7 +111,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
             id = id+1;
             id1 = id1+1;
             String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id1, mydate, tv_sumPrice.getText().toString(),name, phone,address);
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id, mydate, tv_sumPrice.getText().toString(),name, phone,address);
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Detailed_Invoice")
@@ -116,10 +120,10 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-//                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                                DatabaseReference reference = database.getReference("Users");
-//                                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                        .child("Receipt").removeValue();
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reference = database.getReference("Users");
+                                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child("Receipt").removeValue();
                                 hoaDonList.clear();
                                 adapter.notifyDataSetChanged();
                                 sum =0;
@@ -127,6 +131,36 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                             }
                         }
                     });
+
+            for (HoaDon hoaDon: hoaDonList) {
+                int idfood = hoaDon.getId();
+                namefood = hoaDon.getName_Food();
+                quantity = hoaDon.getQuantity_Food();
+                note = hoaDon.getNote_Food();
+                Food_HoaDonChiTiet foodHoaDonChiTiet = new Food_HoaDonChiTiet(namefood,quantity,note);
+                FirebaseDatabase.getInstance().getReference("Food_Detailed_Invoices")
+                        .child(String.valueOf(id1))
+                        .child(String.valueOf(idfood))
+                        .setValue(foodHoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                }
+                            }
+                        });
+                FirebaseDatabase.getInstance().getReference("Users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("Food_Detailed_Invoices")
+                        .child(String.valueOf(id))
+                        .child(String.valueOf(idfood))
+                        .setValue(foodHoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                }
+                            }
+                        });
+            }
 
             HoaDonChiTietAdmin hoaDonChiTietAdmin = new HoaDonChiTietAdmin(id1, mydate, tv_sumPrice.getText().toString(),name, phone,address,"Confirm");
             FirebaseDatabase.getInstance().getReference("Detailed_Invoices")
@@ -208,7 +242,6 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         Toast.makeText(getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 
     @Override

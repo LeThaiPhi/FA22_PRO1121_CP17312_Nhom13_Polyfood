@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.model.SanPham;
+import com.example.duan_oder_doan.model.SanPham_Favorite;
 import com.example.duan_oder_doan.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -94,6 +95,23 @@ public class HoaDonUser extends AppCompatActivity {
                         }
                     });
 
+        });
+
+        findViewById(R.id.img_favorite).setOnClickListener(v ->{
+            SanPham_Favorite sanPham_favorite = new SanPham_Favorite(imgFood,tv_nameFood.getText().toString(), tv_priceFood.getText().toString(), tv_noteFood.getText().toString());
+            FirebaseDatabase.getInstance().getReference("Users")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("Favorite")
+                    .child(tv_nameFood.getText().toString())
+                    .setValue(sanPham_favorite).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(HoaDonUser.this, "Add food to favorite successfully!", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(HoaDonUser.this, TrangChuUser.class));
+                            }
+                        }
+                    });
         });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
