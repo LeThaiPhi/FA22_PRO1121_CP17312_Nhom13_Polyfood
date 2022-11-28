@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duan_oder_doan.GioHangUser;
 import com.example.duan_oder_doan.OdersManageActivity;
 import com.example.duan_oder_doan.R;
+import com.example.duan_oder_doan.model.Food_HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDonChiTietAdmin;
@@ -77,38 +78,36 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
             RecyclerView recyclerView = dialog.findViewById(R.id.rcv_detailed_invoice);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(v.getContext(), DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);
-            List<HoaDon> hoaDonList = new ArrayList<>();
-            Adapter_Detailed_Invoice_Food adapter = new Adapter_Detailed_Invoice_Food(hoaDonList);
+            List<Food_HoaDonChiTiet> food_hoaDonChiTietList = new ArrayList<>();
+            Adapter_Food_HoaDonChiTiet adapter = new Adapter_Food_HoaDonChiTiet(food_hoaDonChiTietList);
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference reference = database.getReference("Users");
-
-            reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child("Receipt").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                HoaDon hoaDon = dataSnapshot.getValue(HoaDon.class);
-                                hoaDonList.add(hoaDon);
-                            }
-                            adapter.notifyDataSetChanged();
-                            recyclerView.setAdapter(adapter);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(v.getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-            tv_phone.setOnLongClickListener(new View.OnLongClickListener() {
+            DatabaseReference reference = database.getReference("Food_Detailed_Invoices");
+            reference.child(String.valueOf(hoaDonChiTietAdmin.getId())).addValueEventListener(new ValueEventListener() {
                 @Override
-                public boolean onLongClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_CALL);
-                    i.setData(Uri.parse("tel:"+hoaDonChiTietAdmin.getPhone()));
-                    v.getContext().startActivity(i);
-                    return false;
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Food_HoaDonChiTiet foodHoaDonChiTiet = dataSnapshot.getValue(Food_HoaDonChiTiet.class);
+                        food_hoaDonChiTietList.add(foodHoaDonChiTiet);
+                    }
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(v.getContext(), "Get list faild!", Toast.LENGTH_LONG).show();
                 }
             });
+
+//            tv_phone.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
+//                    Intent i = new Intent(Intent.ACTION_CALL);
+//                    i.setData(Uri.parse("tel:"+hoaDonChiTietAdmin.getPhone()));
+//                    v.getContext().startActivity(i);
+//                    return false;
+//                }
+//            });
 
             dialog.show();
         });

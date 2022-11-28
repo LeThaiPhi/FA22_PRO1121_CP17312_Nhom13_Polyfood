@@ -1,5 +1,6 @@
 package com.example.duan_oder_doan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Frag_Oder extends Fragment {
 
@@ -45,7 +48,18 @@ public class Frag_Oder extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.rcv_oder);
-
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("Users");
+                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("Detailed_Invoice").removeValue();
+                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("Food_Detailed_Invoices").removeValue();
+            }
+        },864000000);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
         hoaDonChiTietList = new ArrayList<>();

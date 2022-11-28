@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.R;
+import com.example.duan_oder_doan.model.Food_HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDon;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.view_holder.View_Holder_Food_HoaDonChiTiet;
@@ -16,10 +17,10 @@ import com.example.duan_oder_doan.view_holder.View_Holder_Receipt_User;
 import java.util.List;
 
 public class Adapter_Food_HoaDonChiTiet extends RecyclerView.Adapter<View_Holder_Food_HoaDonChiTiet> {
-    private List<HoaDon> hoaDonList;
+    private List<Food_HoaDonChiTiet> food_hoaDonChiTietList;
 
-    public Adapter_Food_HoaDonChiTiet(List<HoaDon> hoaDonList) {
-        this.hoaDonList = hoaDonList;
+    public Adapter_Food_HoaDonChiTiet(List<Food_HoaDonChiTiet> food_hoaDonChiTietList) {
+        this.food_hoaDonChiTietList = food_hoaDonChiTietList;
     }
 
     @NonNull
@@ -34,15 +35,15 @@ public class Adapter_Food_HoaDonChiTiet extends RecyclerView.Adapter<View_Holder
 
     @Override
     public void onBindViewHolder(@NonNull View_Holder_Food_HoaDonChiTiet holder, int position) {
-        HoaDon hoaDon = hoaDonList.get(position);
+        Food_HoaDonChiTiet hoaDon = food_hoaDonChiTietList.get(position);
 
-        holder.tvNameFood.setText(hoaDon.getName_Food());
-        holder.tvNoteFood.setText(hoaDon.getNote_Food());
-        holder.tvQuantityFood.setText(hoaDon.getQuantity_Food());
+        holder.tvNameFood.setText(hoaDon.getName());
+        holder.tvNoteFood.setText(hoaDon.getNote());
+        holder.tvQuantityFood.setText(hoaDon.getQuantity());
     }
 
     @Override
     public int getItemCount() {
-        return hoaDonList == null ? 0 : hoaDonList.size();
+        return food_hoaDonChiTietList == null ? 0 : food_hoaDonChiTietList.size();
     }
 }

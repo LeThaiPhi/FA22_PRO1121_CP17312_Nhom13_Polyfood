@@ -24,14 +24,20 @@ public class ThongBao extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         int img = bundle.getInt("image");
-        if (img == R.drawable.mhc1) {
-            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Category%2F2515189.png?alt=media&token=af45cffb-1c9c-4eed-b78e-7720a41b0cf8");
+        if (img == R.drawable.qc) {
+            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Advertisement%2Fqc.png?alt=media&token=0c29df27-dfbe-4cd8-937e-48d855bc1c3e");
         }
-        if (img == R.drawable.mhc2) {
-            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/7d25773445873512a96f59d1a2a65a03.jpg?alt=media&token=772ba3e3-b0a6-465e-8c2a-2eb8bc920560");
+        if (img == R.drawable.qc1) {
+            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Advertisement%2Fqc1.jpg?alt=media&token=5b30e500-25de-4c8c-a265-15512ecfb751");
         }
-        if (img == R.drawable.mhc4) {
-            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40");
+        if (img == R.drawable.qc2) {
+            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Advertisement%2Fqc2.png?alt=media&token=116adf2c-385b-43b4-9f9b-4ca7a708d97e");
+        }
+        if (img == R.drawable.qc3) {
+            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Advertisement%2Fqc3.png?alt=media&token=acbe166b-03de-4b96-955b-6edc1c16ad89");
+        }
+        if (img == R.drawable.qc4) {
+            uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/Images_Advertisement%2Fqc4.png?alt=media&token=65448bf7-0089-45dd-b820-ed1cff49678f");
         }
         img_advertise.setBackgroundResource(img);
 
