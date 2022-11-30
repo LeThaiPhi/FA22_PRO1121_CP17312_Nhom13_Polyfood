@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan_oder_doan.AvatarUser;
 import com.example.duan_oder_doan.DangKy;
 import com.example.duan_oder_doan.DangNhap;
 import com.example.duan_oder_doan.EmailUser;
@@ -52,6 +53,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_add_category extends Fragment implements Adapter_Category_Admin.Callback {
@@ -67,6 +69,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
     private RecyclerView recyclerView;
     private TheLoai theLoai;
     private int id = 0;
+    private String image1, image2;
 
     @Nullable
     @Override
@@ -80,16 +83,52 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
 
         recyclerView = view.findViewById(R.id.rcv_category);
         btn_floatCategory = view.findViewById(R.id.floatCategory);
+        storage = FirebaseStorage.getInstance();
         launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 img_category.setImageURI(result);
+                final StorageReference reference = storage.getReference("Images_Category")
+                        .child(edt_nameCategory.getText().toString());
+                reference.putFile(result)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Toast.makeText(getContext(),"Loading...", Toast.LENGTH_LONG).show();
+                                        image1 = uri.toString();
+                                    }
+                                });
+
+                            }
+                        });
             }
+
         });
         launcher1 = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 img_categoryUpdate.setImageURI(result);
+                final StorageReference reference = storage.getReference("Images_Category")
+                        .child(edt_nameCategory.getText().toString());
+                reference.putFile(result)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Toast.makeText(getContext(),"Loading...", Toast.LENGTH_LONG).show();
+                                        image2 = uri.toString();
+                                    }
+                                });
+
+                            }
+                        });
             }
         });
 
@@ -115,7 +154,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 theLoaiList.clear();
                 adapter.notifyDataSetChanged();
                 id = id+1;
-                theLoai = new TheLoai(id, image, nameCategory);
+                theLoai = new TheLoai(id, image1, nameCategory);
                 FirebaseDatabase.getInstance().getReference("Categories")
                         .child(String.valueOf(id))
                         .setValue(theLoai).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -217,7 +256,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                 return;
             }
 
-            TheLoai theLoai1 = new TheLoai(theLoai.getId(), theLoai.getImg_category(), nameCategory);
+            TheLoai theLoai1 = new TheLoai(theLoai.getId(), image2, nameCategory);
             FirebaseDatabase.getInstance().getReference("Categories")
                     .child(String.valueOf(theLoai1.getId()))
                     .setValue(theLoai1).addOnCompleteListener(new OnCompleteListener<Void>() {

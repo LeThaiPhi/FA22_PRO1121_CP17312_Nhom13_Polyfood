@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Holder_Detailed_Invoice_Admin> {
@@ -84,6 +85,7 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 Food_HoaDonChiTiet foodHoaDonChiTiet = dataSnapshot.getValue(Food_HoaDonChiTiet.class);
                                 food_hoaDonChiTietList.add(foodHoaDonChiTiet);
+                                Collections.reverse(food_hoaDonChiTietList);
                             }
                             adapter.notifyDataSetChanged();
                             recyclerView.setAdapter(adapter);
@@ -109,9 +111,11 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
 
         holder.tvStatus.setText(hoaDonChiTietAdmin.getStatus());
         if (holder.tvStatus.getText().toString().equals("Confirm")) {
-            holder.tvStatus.setVisibility(View.INVISIBLE);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+            holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }
         if (holder.tvStatus.getText().toString().equals("Doing")) {
+            holder.line_item1.setBackgroundResource(R.drawable.a_doing);
             holder.tvStatus.setOnClickListener(v ->{
                 String status = "Done";
                 hoaDonChiTietAdminList.clear();
@@ -130,6 +134,7 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
             });
         }
         if (holder.tvStatus.getText().toString().equals("Done")) {
+            holder.line_item1.setBackgroundResource(R.drawable.a_done);
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }
@@ -139,5 +144,10 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
     @Override
     public int getItemCount() {
         return hoaDonChiTietAdminList == null ? 0 : hoaDonChiTietAdminList.size();
+    }
+
+    public void filterList(ArrayList<HoaDonChiTietAdmin> filteredList) {
+        hoaDonChiTietAdminList = filteredList;
+        notifyDataSetChanged();
     }
 }

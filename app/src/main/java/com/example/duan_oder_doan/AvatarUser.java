@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan_oder_doan.model.User;
@@ -62,7 +63,7 @@ public class AvatarUser extends AppCompatActivity {
     private ActivityResultLauncher<String> launcher;
 
     private CircleImageView img_avatar;
-    private String name, email, pass, phone, gender, date_of_birth, image;
+    private String name, email, pass, phone, gender, date_of_birth, image1, address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +82,14 @@ public class AvatarUser extends AppCompatActivity {
                 User userProfile = snapshot.getValue(User.class);
 
                 if (userProfile != null) {
-                    image = userProfile.getImage();
+                    String image = userProfile.getImage();
                     Picasso.get().load(image).into(img_avatar);
                     email = userProfile.getEmail();
                     pass = userProfile.getPassword();
                     name = userProfile.getFullName();
                     phone = userProfile.getPhone();
                     gender = userProfile.getGender();
+                    address = userProfile.getAddress();
                     date_of_birth = userProfile.getDate_of_birth();
                 }
             }
@@ -98,46 +100,28 @@ public class AvatarUser extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_update).setOnClickListener(v ->{
-            User userProfile1 = new User(name, email, phone,pass, image, gender, date_of_birth);
-            FirebaseDatabase.getInstance().getReference("Users")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child("User")
-                    .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(AvatarUser.this,"User avatar updated!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(AvatarUser.this, GioiThieuUser.class);
-                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(AvatarUser.this).toBundle();
-                                startActivity(intent, bundle);
-                            }
-                        }
-                    });
-        });
-
         launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 img_avatar.setImageURI(result);
 
-//                final StorageReference reference = storage.getReference("Images_User")
-//                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//                reference.putFile(result)
-//                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
-//                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                    @Override
-//                                    public void onSuccess(Uri uri) {
-//                                        final String downloadUrl = uri.toString();
-//                                        image1 = downloadUrl;
-//                                    }
-//                                });
-//
-//                            }
-//                        });
+                final StorageReference reference = storage.getReference("Images_User")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                reference.putFile(result)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Toast.makeText(AvatarUser.this,"Loading...", Toast.LENGTH_LONG).show();
+                                        image1 = uri.toString();
+                                    }
+                                });
+
+                            }
+                        });
 
             }
         });
@@ -169,6 +153,24 @@ public class AvatarUser extends AppCompatActivity {
             dialog.getWindow().setGravity(Gravity.BOTTOM);
         });
 
+        findViewById(R.id.btn_update).setOnClickListener(v ->{
+            User userProfile1 = new User(name, email, phone, pass, image1, gender, date_of_birth, address);
+            FirebaseDatabase.getInstance().getReference("Users")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("User")
+                    .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AvatarUser.this,"User avatar updated!", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(AvatarUser.this, GioiThieuUser.class);
+                                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(AvatarUser.this).toBundle();
+                                startActivity(intent, bundle);
+                            }
+                        }
+                    });
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_avatar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -181,7 +183,6 @@ public class AvatarUser extends AppCompatActivity {
 
         if (requestCode == 1111) {
             Bitmap b = (Bitmap) data.getExtras().get("data");
-            img_avatar.setImageBitmap(b);
         }
 
     }

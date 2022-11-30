@@ -7,12 +7,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.duan_oder_doan.adapter.Adapter_Detailed_Invoice_Admin;
 import com.example.duan_oder_doan.adapter.Adapter_Detailed_Invoice_User;
 import com.example.duan_oder_doan.model.HoaDonChiTiet;
 import com.example.duan_oder_doan.model.HoaDonChiTietAdmin;
+import com.example.duan_oder_doan.model.SanPham;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OdersManageActivity extends AppCompatActivity {
@@ -46,8 +51,23 @@ public class OdersManageActivity extends AppCompatActivity {
         hoaDonChiTietAdminList = new ArrayList<>();
         adapter = new Adapter_Detailed_Invoice_Admin(hoaDonChiTietAdminList);
         getList();
-        findViewById(R.id.tv_closing).setOnClickListener(v ->{
 
+        EditText edt_search = findViewById(R.id.edt_search);
+        edt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
         });
 
     }
@@ -61,6 +81,7 @@ public class OdersManageActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             hoaDonChiTietAdmin = dataSnapshot.getValue(HoaDonChiTietAdmin.class);
                             hoaDonChiTietAdminList.add(hoaDonChiTietAdmin);
+                            Collections.reverse(hoaDonChiTietAdminList);
                         }
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
@@ -71,5 +92,15 @@ public class OdersManageActivity extends AppCompatActivity {
                         Toast.makeText(OdersManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private void filter(String text) {
+        ArrayList<HoaDonChiTietAdmin> filteredList = new ArrayList<>();
+        for (HoaDonChiTietAdmin hoaDon: hoaDonChiTietAdminList){
+            if (hoaDon.getDate().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(hoaDon);
+            }
+        }
+        adapter.filterList(filteredList);
     }
 }

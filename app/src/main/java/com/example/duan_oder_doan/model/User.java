@@ -8,11 +8,12 @@ public class User {
     private String image;
     private String gender;
     private String date_of_birth;
+    private String address;
 
     public User() {
     }
 
-    public User(String fullName, String email, String phone, String password, String image, String gender, String date_of_birth) {
+    public User(String fullName, String email, String phone, String password, String image, String gender, String date_of_birth, String address) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -20,6 +21,15 @@ public class User {
         this.image = image;
         this.gender = gender;
         this.date_of_birth = date_of_birth;
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getFullName() {

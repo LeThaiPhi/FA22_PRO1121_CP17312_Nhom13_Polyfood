@@ -68,6 +68,7 @@ public class DangKy extends AppCompatActivity {
         String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/avatar.png?alt=media&token=021e12e4-2ee4-4c37-a803-b901c6552141";
         String gender = "";
         String date_of_birth = "";
+        String address = "";
 
         if (fullName.isEmpty()) {
             edt_name.setError("Full name is required");
@@ -108,7 +109,7 @@ public class DangKy extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            User user = new User(fullName, email,  phone, password, image, gender, date_of_birth);
+                            User user = new User(fullName, email,  phone, password, image, gender, date_of_birth, address);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .child("User")

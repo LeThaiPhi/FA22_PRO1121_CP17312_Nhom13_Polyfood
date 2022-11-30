@@ -80,6 +80,7 @@ public class HoaDonUser extends AppCompatActivity {
         });
         findViewById(R.id.line_addtoCart).setOnClickListener(v ->{
             id = id+1;
+            sum = 0;
             HoaDon hoaDon = new HoaDon(id, imgFood, tv_nameFood.getText().toString(), tv_priceFood.getText().toString(), tv_quantityFood.getText().toString(), edt_note.getText().toString());
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
