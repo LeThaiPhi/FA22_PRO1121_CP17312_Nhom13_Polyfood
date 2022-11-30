@@ -23,7 +23,7 @@
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
-        android:drawableLeft="@drawable/ic_baseline_home_24"
+        android:drawableLeft="@drawable/ic_baseline_home_24_1"
         android:drawablePadding="15dp"/>
 
     <Button

@@ -31,7 +31,7 @@ public class EmailUser extends AppCompatActivity {
     private String userID;
 
     private EditText edt_email;
-    private String name,phone, pass, gender, date_of_birth, image;
+    private String name,phone, pass, gender, date_of_birth, image, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class EmailUser extends AppCompatActivity {
                     phone = userProfile.getPhone();
                     gender = userProfile.getGender();
                     date_of_birth = userProfile.getDate_of_birth();
+                    address = userProfile.getAddress();
                     image = userProfile.getImage();
                 }
             }
@@ -75,7 +76,7 @@ public class EmailUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                User userProfile1 = new User(name, email,  phone,pass, image, gender, date_of_birth);
+                                User userProfile1 = new User(name, email,  phone,pass, image, gender, date_of_birth, address);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FoodList extends AppCompatActivity{
@@ -58,6 +59,7 @@ public class FoodList extends AppCompatActivity{
                     sanPham = dataSnapshot.getValue(SanPham.class);
                     if (sanPham.getCategory().equals(category)) {
                         sanPhamList.add(sanPham);
+                        Collections.reverse(sanPhamList);
                     }
                 }
                 adapter.notifyDataSetChanged();

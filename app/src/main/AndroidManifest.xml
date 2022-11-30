@@ -36,7 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".StatisticalManageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".TrangChuManage"/>
         <activity
             android:name=".AddFoodManageActivity"
             android:exported="false"

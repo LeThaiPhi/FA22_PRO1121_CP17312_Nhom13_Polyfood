@@ -14,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan_oder_doan.GioHangUser;
+import com.example.duan_oder_doan.GioiThieuUser;
+import com.example.duan_oder_doan.NameUser;
 import com.example.duan_oder_doan.R;
 import com.example.duan_oder_doan.adapter.Adapter_Detailed_Invoice_User;
 import com.example.duan_oder_doan.adapter.Adapter_Receipt_User;
@@ -28,6 +31,7 @@ import com.example.duan_oder_doan.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,13 +53,13 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
     private int id =0;
     private int id1 =0;
     private int number=0;
-    private String name = "";
-    private String phone = "";
     private String namefood = "";
     private String quantity = "";
     private String note = "";
-    private String address = "";
     private List<HoaDonChiTiet> hoaDonChiTietList = new ArrayList<>();
+
+    private EditText edt_address;
+    private String name_user, email_user,pass_user, phone_user, gender_user, date_of_birth_user, image_user, address_user;
 
     @Nullable
     @Override
@@ -79,8 +83,14 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         User userProfile = snapshot.getValue(User.class);
 
                         if (userProfile != null) {
-                            name = userProfile.getFullName();
-                            phone = userProfile.getPhone();
+                            name_user = userProfile.getEmail();
+                            email_user = userProfile.getEmail();
+                            pass_user = userProfile.getPassword();
+                            phone_user = userProfile.getPhone();
+                            gender_user = userProfile.getGender();
+                            date_of_birth_user = userProfile.getDate_of_birth();
+                            address_user = userProfile.getAddress();
+                            image_user = userProfile.getImage();
                         }
                     }
 
@@ -94,24 +104,38 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
             final Dialog dialog = new Dialog(v.getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
             dialog.setContentView(R.layout.dialog_addess);
 
-            EditText edt_address = dialog.findViewById(R.id.edt_address);
-
+            edt_address = dialog.findViewById(R.id.edt_address);
+            edt_address.setText(address_user);
             dialog.findViewById(R.id.btn_save).setOnClickListener(v1 ->{
-                address = edt_address.getText().toString();
-                dialog.dismiss();
+                address_user = edt_address.getText().toString();
+                String address = edt_address.getText().toString();
+                User userProfile1 = new User(name_user, email_user, phone_user, pass_user, image_user, gender_user, date_of_birth_user, address);
+
+                FirebaseDatabase.getInstance().getReference("Users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("User")
+                        .setValue(userProfile1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(),"User address updated!", Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
             });
             dialog.show();
         });
 
         view.findViewById(R.id.line_checkout).setOnClickListener(v ->{
-            if (address.length()<1) {
+            if (address_user.length()<1) {
                 Toast.makeText(getContext(), "Add address!", Toast.LENGTH_LONG).show();
                 return;
             }
             id = id+1;
             id1 = id1+1;
             String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id, mydate, tv_sumPrice.getText().toString(),name, phone,address);
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(id, mydate, tv_sumPrice.getText().toString(),name_user, phone_user,address_user);
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Detailed_Invoice")
@@ -127,7 +151,6 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                                 hoaDonList.clear();
                                 adapter.notifyDataSetChanged();
                                 sum =0;
-
                             }
                         }
                     });
@@ -162,7 +185,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         });
             }
 
-            HoaDonChiTietAdmin hoaDonChiTietAdmin = new HoaDonChiTietAdmin(id1, mydate, tv_sumPrice.getText().toString(),name, phone,address,"Confirm");
+            HoaDonChiTietAdmin hoaDonChiTietAdmin = new HoaDonChiTietAdmin(id1, mydate, tv_sumPrice.getText().toString(),name_user, phone_user,address_user,"Confirm");
             FirebaseDatabase.getInstance().getReference("Detailed_Invoices")
                     .child(String.valueOf(id1))
                     .setValue(hoaDonChiTietAdmin).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -292,4 +315,5 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
 
         }
     }
+
 }

@@ -2,13 +2,16 @@ package com.example.duan_oder_doan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan_oder_doan.model.HoaDonChiTietAdmin;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +27,10 @@ public class TrangChuManage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chu_manage);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         tv_countOrders = findViewById(R.id.tv_countOrders);
         tv_countOrders.setText(String.valueOf(count));
@@ -63,9 +70,11 @@ public class TrangChuManage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        findViewById(R.id.layoutAdmin).setOnClickListener(view -> {
-            Intent intent = new Intent(TrangChuManage.this, AdminManageActivity.class);
-            startActivity(intent);
+        findViewById(R.id.layoutLogout).setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, DangNhap.class);
+            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+            startActivity(intent, bundle);
         });
     }
 }

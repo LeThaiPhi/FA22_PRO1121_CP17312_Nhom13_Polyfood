@@ -49,7 +49,7 @@ public class GioiThieuUser extends AppCompatActivity {
     private TextView tv_gender;
     private TextView tv_dateofbirth;
 
-    private String name, email, pass, phone, gender, date_of_birth, image;
+    private String name, email, pass, phone, gender, date_of_birth, image, address;
 
 
     @Override
@@ -86,6 +86,7 @@ public class GioiThieuUser extends AppCompatActivity {
                     gender = userProfile.getGender();
                     tv_gender.setText(""+gender);
                     date_of_birth = userProfile.getDate_of_birth();
+                    address = userProfile.getAddress();
                     tv_dateofbirth.setText(""+date_of_birth);
                 }
             }
@@ -179,7 +180,7 @@ public class GioiThieuUser extends AppCompatActivity {
     }
 
     private void update_gender(){
-        User userProfile1 = new User(name, email, phone, pass, image, tv_gender.getText().toString(), tv_dateofbirth.getText().toString());
+        User userProfile1 = new User(name, email, phone, pass, image, tv_gender.getText().toString(), tv_dateofbirth.getText().toString(), address);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -195,7 +196,7 @@ public class GioiThieuUser extends AppCompatActivity {
     }
 
     private void update_date(){
-        User userProfile1 = new User(name, email, phone,pass, image, tv_gender.getText().toString(), tv_dateofbirth.getText().toString());
+        User userProfile1 = new User(name, email, phone,pass, image, tv_gender.getText().toString(), tv_dateofbirth.getText().toString(), address);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

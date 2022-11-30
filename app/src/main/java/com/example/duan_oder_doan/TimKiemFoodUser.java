@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class TimKiemFoodUser extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         recyclerView = findViewById(R.id.rcv_searchlist);
+        recyclerView.setVisibility(View.INVISIBLE);
 
         sanPhamList = new ArrayList<>();
         adapter = new Adapter_Food_User(sanPhamList);
@@ -65,6 +67,7 @@ public class TimKiemFoodUser extends AppCompatActivity {
         });
 
         EditText edt_searchFood = findViewById(R.id.edt_searchfood);
+
         edt_searchFood.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -78,6 +81,7 @@ public class TimKiemFoodUser extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                recyclerView.setVisibility(View.VISIBLE);
                 filter(editable.toString());
             }
         });

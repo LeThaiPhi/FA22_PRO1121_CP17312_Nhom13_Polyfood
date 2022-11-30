@@ -29,7 +29,7 @@ public class PhoneUser extends AppCompatActivity {
     private String userID;
 
     private EditText edt_phone;
-    private String name, email,pass, gender, date_of_birth, image;
+    private String name, email,pass, gender, date_of_birth, image, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class PhoneUser extends AppCompatActivity {
                     gender = userProfile.getGender();
                     date_of_birth = userProfile.getDate_of_birth();
                     image = userProfile.getImage();
+                    address = userProfile.getAddress();
                 }
             }
 
@@ -67,7 +68,7 @@ public class PhoneUser extends AppCompatActivity {
 
         findViewById(R.id.btn_update).setOnClickListener(v ->{
             String phone = edt_phone.getText().toString();
-            User userProfile1 = new User(name, email, phone,pass, image, gender, date_of_birth);
+            User userProfile1 = new User(name, email, phone,pass, image, gender, date_of_birth, address);
 
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

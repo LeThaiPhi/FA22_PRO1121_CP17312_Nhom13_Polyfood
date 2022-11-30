@@ -28,19 +28,23 @@ import com.example.duan_oder_doan.adapter.Adapter_Food_Admin;
 import com.example.duan_oder_doan.model.SanPham;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callback {
-    private EditText edt_nameFood;
+    private EditText edt_nameFood, edt_nameFoodUpdate;
     private EditText edt_priceFood;
     private EditText edt_noteFood;
     private Spinner spn_category;
@@ -48,11 +52,13 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
 
     private ActivityResultLauncher<String> launcher;
     private ActivityResultLauncher<String> launcher1;
+    private FirebaseStorage storage;
 
     private List<SanPham> sanPhamList;
     private Adapter_Food_Admin adapter;
     private RecyclerView recyclerView;
     private SanPham sanPham;
+    private String image1, image2;
 
     private int id = 0;
 
@@ -66,16 +72,53 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rcv_food);
+        storage = FirebaseStorage.getInstance();
         launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 img_food.setImageURI(result);
+                final StorageReference reference = storage.getReference("Images_Food")
+                        .child(spn_category.getSelectedItem().toString())
+                        .child(edt_nameFood.getText().toString());
+                reference.putFile(result)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Toast.makeText(getContext(),"Loading...", Toast.LENGTH_LONG).show();
+                                        image1 = uri.toString();
+                                    }
+                                });
+
+                            }
+                        });
             }
         });
         launcher1 = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 img_foodUpdate.setImageURI(result);
+                final StorageReference reference = storage.getReference("Images_Food")
+                        .child(spn_category.getSelectedItem().toString())
+                        .child(edt_nameFoodUpdate.getText().toString());
+                reference.putFile(result)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                                firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Toast.makeText(getContext(),"Loading...", Toast.LENGTH_LONG).show();
+                                        image2 = uri.toString();
+                                    }
+                                });
+
+                            }
+                        });
             }
         });
 
@@ -142,7 +185,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                 sanPhamList.clear();
                 adapter.notifyDataSetChanged();
 
-                sanPham = new SanPham(id,category, image, nameFood, priceFood, note);
+                sanPham = new SanPham(id,category, image1, nameFood, priceFood, note);
                 FirebaseDatabase.getInstance().getReference("Foods")
                         .child(String.valueOf(id))
                         .setValue(sanPham).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -219,7 +262,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
     public void update(SanPham sanPham) {
         final Dialog dialog = new Dialog(getContext(), androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.setContentView(R.layout.dialog_update_food);
-        EditText edt_nameFoodUpdate = dialog.findViewById(R.id.edt_nameFoodUpdate);
+        edt_nameFoodUpdate = dialog.findViewById(R.id.edt_nameFoodUpdate);
         EditText edt_priceFoodUpdate = dialog.findViewById(R.id.edt_priceFoodUpdate);
         EditText edt_noteFoodUpdate = dialog.findViewById(R.id.edt_noteFoodUpdate);
         Spinner spn_categoryUpdate = dialog.findViewById(R.id.spn_categoryUpdate);
@@ -229,6 +272,10 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
         edt_priceFoodUpdate.setText(sanPham.getPrice_product());
         edt_noteFoodUpdate.setText(sanPham.getNote_product());
         Picasso.get().load(sanPham.getImg_product()).into(img_foodUpdate);
+
+        dialog.findViewById(R.id.btn_imgfoodUpdate).setOnClickListener(v1 ->{
+            launcher1.launch("image/*");
+        });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Categories");
@@ -272,7 +319,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
             sanPhamList.clear();
             adapter.notifyDataSetChanged();
 
-            SanPham sanPham1 = new SanPham(sanPham.getId(), category, sanPham.getImg_product(), nameFood, priceFood, note);
+            SanPham sanPham1 = new SanPham(sanPham.getId(), category, image2, nameFood, priceFood, note);
             FirebaseDatabase.getInstance().getReference("Foods")
                     .child(String.valueOf(sanPham1.getId()))
                     .setValue(sanPham1).addOnCompleteListener(new OnCompleteListener<Void>() {

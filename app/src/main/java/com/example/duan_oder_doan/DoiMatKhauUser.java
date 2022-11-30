@@ -30,7 +30,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
     private EditText edt_currpass, edt_newpass, edt_pass;
     private FirebaseAuth mAuth;
 
-    private String name,email,password, phone, gender, date_of_birth, image;
+    private String name,email,password, phone, gender, date_of_birth, image, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
                     phone = userProfile.getPhone();
                     gender = userProfile.getGender();
                     date_of_birth = userProfile.getDate_of_birth();
+                    address = userProfile.getAddress();
                     image = userProfile.getImage();
                 }
             }
@@ -126,7 +127,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                User userProfile1 = new User(name, email, phone, newpass, image, gender, date_of_birth);
+                                User userProfile1 = new User(name, email, phone, newpass, image, gender, date_of_birth, address);
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .child("User")
