@@ -42,6 +42,9 @@ public class AddFoodManageActivity extends AppCompatActivity {
                     case 1:
                         tab.setText("Add Food");
                         break;
+                    case 2:
+                        tab.setText("Food Popular");
+                        break;
                 }
             }
         }).attach();

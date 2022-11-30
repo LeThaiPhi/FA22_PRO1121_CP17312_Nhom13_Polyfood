@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.duan_oder_doan.fragment.Frag_add_category;
 import com.example.duan_oder_doan.fragment.Frag_add_food;
+import com.example.duan_oder_doan.fragment.Frag_add_food_popular;
 
 public class PagerAdapter_AddFood extends FragmentStateAdapter {
     public PagerAdapter_AddFood(@NonNull FragmentActivity fragmentActivity) {
@@ -21,6 +22,8 @@ public class PagerAdapter_AddFood extends FragmentStateAdapter {
                 return new Frag_add_category();
             case 1:
                 return new Frag_add_food();
+            case 2:
+                return new Frag_add_food_popular();
             default:
                 return new Frag_add_category();
         }
@@ -28,6 +31,6 @@ public class PagerAdapter_AddFood extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

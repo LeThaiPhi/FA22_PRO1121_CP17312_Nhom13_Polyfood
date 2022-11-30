@@ -20,7 +20,11 @@ import android.widget.Toast;
 
 import com.example.duan_oder_doan.adapter.Adapter_Category_Admin;
 import com.example.duan_oder_doan.adapter.Adapter_Category_User;
+import com.example.duan_oder_doan.adapter.Adapter_Food_Admin;
+import com.example.duan_oder_doan.adapter.Adapter_Food_Popular_User;
+import com.example.duan_oder_doan.adapter.Adapter_Food_User;
 import com.example.duan_oder_doan.adapter.PagerAdapter_ThongBao;
+import com.example.duan_oder_doan.model.SanPham_Popular;
 import com.example.duan_oder_doan.model.TheLoai;
 import com.example.duan_oder_doan.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,9 +61,11 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
     private CircleImageView img_avatar;
     private TextView tv_name;
 
+    private List<SanPham_Popular> sanPham_popularList = new ArrayList<>();
+    private Adapter_Food_Popular_User adapter_food_popular_user = new Adapter_Food_Popular_User(sanPham_popularList);
     private List<TheLoai> theLoaiList = new ArrayList<>();
     private Adapter_Category_User adapter_category = new Adapter_Category_User(theLoaiList, this);
-    private RecyclerView rcv_category;
+    private RecyclerView rcv_category, rcv_popular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +75,8 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
         tv_name = findViewById(R.id.tv_name);
         img_avatar = findViewById(R.id.img_avatar);
         rcv_category = findViewById(R.id.rcv_category);
-        getList_Category();
+        rcv_popular = findViewById(R.id.rcv_popular);
+        getList();
 
         // Lay thong tin tu firebase hien thi len
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -198,7 +205,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
         }
     }
 
-    private void getList_Category(){
+    private void getList(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Categories");
 
@@ -211,6 +218,25 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
                 }
                 adapter_category.notifyDataSetChanged();
                 rcv_category.setAdapter(adapter_category);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TrangChuUser.this, "Get list category faild!", Toast.LENGTH_LONG).show();
+            }
+        });
+        DatabaseReference reference1 = database.getReference("FoodPopulars");
+
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    SanPham_Popular sanPham_popular = dataSnapshot.getValue(SanPham_Popular.class);
+                    sanPham_popularList.add(sanPham_popular);
+                }
+                adapter_food_popular_user.notifyDataSetChanged();
+                rcv_popular.setAdapter(adapter_food_popular_user);
 
             }
 
