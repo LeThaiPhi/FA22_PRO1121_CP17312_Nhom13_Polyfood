@@ -154,6 +154,31 @@
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ln_information"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/border4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:backgroundTint="#fff"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Restaurant information"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_logout"
             android:layout_marginTop="20dp"
