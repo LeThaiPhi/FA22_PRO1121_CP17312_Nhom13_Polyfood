@@ -140,8 +140,8 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
             dialog.findViewById(R.id.btn_imgcategory).setOnClickListener(v1 ->{
                 launcher.launch("image/*");
             });
-            String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
-            Picasso.get().load(image).into(img_category);
+            image1 = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
+            Picasso.get().load(image1).into(img_category);
 
             dialog.findViewById(R.id.btn_save).setOnClickListener(view1 -> {
                 String nameCategory = edt_nameCategory.getText().toString();

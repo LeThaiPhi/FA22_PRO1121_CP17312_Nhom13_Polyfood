@@ -131,8 +131,8 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
             spn_category = dialog.findViewById(R.id.spn_category);
             img_food = dialog.findViewById(R.id.img_food);
 
-            String image = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
-            Picasso.get().load(image).into(img_food);
+            image1 = "https://firebasestorage.googleapis.com/v0/b/duan-oder-doan.appspot.com/o/vdfood.png?alt=media&token=425bc41a-426c-477b-99f8-b2efa36ebc40";
+            Picasso.get().load(image1).into(img_food);
 
             dialog.findViewById(R.id.btn_imgfood).setOnClickListener(v1 ->{
                 launcher.launch("image/*");
