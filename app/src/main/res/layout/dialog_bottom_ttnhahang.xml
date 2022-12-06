@@ -54,7 +54,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: congpgph26764@fpt.edu.vn"
+                android:text="Email: poly@gmail.com"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
