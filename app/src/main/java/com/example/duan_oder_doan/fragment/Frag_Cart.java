@@ -40,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback {
@@ -151,6 +152,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                                 hoaDonList.clear();
                                 adapter.notifyDataSetChanged();
                                 sum =0;
+                                Toast.makeText(getContext(), "Order success!", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -237,6 +239,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                     hoaDonList.add(hoaDon);
                     sum = sum + (Integer.parseInt(hoaDon.getPrice_Food())*Integer.parseInt(hoaDon.getQuantity_Food()));
                 }
+                Collections.reverse(hoaDonList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 tv_sumPrice.setText(String.valueOf(sum));

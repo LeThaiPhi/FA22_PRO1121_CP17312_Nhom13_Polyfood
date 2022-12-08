@@ -117,7 +117,7 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
         if (holder.tvStatus.getText().toString().equals("Doing")) {
             holder.line_item1.setBackgroundResource(R.drawable.a_doing);
             holder.tvStatus.setOnClickListener(v ->{
-                String status = "Done";
+                String status = "Shipping";
                 hoaDonChiTietAdminList.clear();
                 notifyDataSetChanged();
                 HoaDonChiTietAdmin hoaDonChiTietAdmin1 = new HoaDonChiTietAdmin(hoaDonChiTietAdmin.getId(), hoaDonChiTietAdmin.getDate(), hoaDonChiTietAdmin.getSum_Price(), hoaDonChiTietAdmin.getName(), hoaDonChiTietAdmin.getPhone(), hoaDonChiTietAdmin.getAddress(), status);
@@ -132,6 +132,11 @@ public class Adapter_Detailed_Invoice_Chef extends RecyclerView.Adapter<View_Hol
                         });
 
             });
+        }
+        if (holder.tvStatus.getText().toString().equals("Shipping")) {
+            holder.line_item1.setBackgroundResource(R.drawable.a_shipping);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+            holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }
         if (holder.tvStatus.getText().toString().equals("Done")) {
             holder.line_item1.setBackgroundResource(R.drawable.a_done);

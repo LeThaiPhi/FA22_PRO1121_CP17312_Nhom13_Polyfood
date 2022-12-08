@@ -49,27 +49,6 @@ public class ThongKeUser extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        findViewById(R.id.btn_clear).setOnClickListener(v ->{
-            final Dialog dialog = new Dialog(this, androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
-            dialog.setContentView(R.layout.dialog_xoa_thong_ke);
-            dialog.findViewById(R.id.btn_agree).setOnClickListener(v1 ->{
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference("Users");
-                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child("Detailed_Invoice").removeValue();
-                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child("Food_Detailed_Invoices").removeValue();
-                sum1 =0;
-                sum2 = 0;
-                Toast.makeText(ThongKeUser.this,"Delete statistical successfully!", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
-            });
-            dialog.findViewById(R.id.btn_cancel).setOnClickListener(v1 ->{
-                dialog.dismiss();
-            });
-            dialog.show();
-        });
-
         hoaDonChiTietList = new ArrayList<>();
         getList();
     }

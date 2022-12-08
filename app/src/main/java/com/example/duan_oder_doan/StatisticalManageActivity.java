@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,17 +21,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StatisticalManageActivity extends AppCompatActivity {
 
     private TextView tvUser;
     private TextView tvCategory;
     private TextView tvFood;
-    private TextView tvDate;
+    private TextView tvFromDate, tvToDate;
     private TextView tvSumoder;
     private TextView tvSummoney;
 
@@ -56,11 +58,12 @@ public class StatisticalManageActivity extends AppCompatActivity {
         tvUser = (TextView) findViewById(R.id.tv_user);
         tvCategory = (TextView) findViewById(R.id.tv_category);
         tvFood = (TextView) findViewById(R.id.tv_food);
-        tvDate = (TextView) findViewById(R.id.tv_date);
+        tvFromDate = (TextView) findViewById(R.id.tv_fromdate);
+        tvToDate = (TextView) findViewById(R.id.tv_todate);
         tvSumoder = (TextView) findViewById(R.id.tv_sumoder);
         tvSummoney = (TextView) findViewById(R.id.tv_summoney);
 
-        tvDate.setOnClickListener(v ->{
+        tvFromDate.setOnClickListener(v ->{
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
             DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -71,7 +74,28 @@ public class StatisticalManageActivity extends AppCompatActivity {
                     mCalendar.set(Calendar.MONTH, month);
                     mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     String selectedDate = DateFormat.getDateInstance().format(mCalendar.getTime());
-                    tvDate.setText(selectedDate);
+                    tvFromDate.setText(selectedDate);
+                }
+            },
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DATE)
+            );
+            dialog.show();
+        });
+
+        tvToDate.setOnClickListener(v ->{
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    Calendar mCalendar = Calendar.getInstance();
+                    mCalendar.set(Calendar.YEAR, year);
+                    mCalendar.set(Calendar.MONTH, month);
+                    mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    String selectedDate = DateFormat.getDateInstance().format(mCalendar.getTime());
+                    tvToDate.setText(selectedDate);
                 }
             },
                     calendar.get(Calendar.YEAR),
@@ -82,15 +106,22 @@ public class StatisticalManageActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_check).setOnClickListener(v ->{
+            if (tvFromDate.getText().toString().equals("From date") || tvToDate.getText().toString().equals("To date")) {
+                Toast.makeText(this, "Please select a date!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             sum2 = 0;
             sum1 = 0;
+            List<Date> dates = getDates(tvFromDate.getText().toString(), tvToDate.getText().toString());
             for (HoaDonChiTietAdmin hoaDonChiTietAdmin: hoaDonChiTietAdminList) {
-                if (hoaDonChiTietAdmin.getDate().toLowerCase().contains(tvDate.getText().toString().toLowerCase())) {
-                    sum1 = hoaDonChiTietAdminList.size();
-                    sum2 = sum2+ Integer.parseInt(hoaDonChiTietAdmin.getSum_Price());
+                for(Date date:dates){
+                    String date1 = DateFormat.getDateInstance().format(date);
+                    if (hoaDonChiTietAdmin.getDate().toLowerCase().contains(""+date1.toLowerCase())) {
+                        sum1 = sum1+1;
+                        sum2 = sum2+ Integer.parseInt(hoaDonChiTietAdmin.getSum_Price());
+                    }
                 }
             }
-
             tvSumoder.setText(String.valueOf(sum1));
             tvSummoney.setText("$ "+(String.valueOf(sum2)));
 
@@ -182,6 +213,36 @@ public class StatisticalManageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private static List<Date> getDates(String dateString1, String dateString2)
+    {
+        ArrayList<Date> dates = new ArrayList<Date>();
+        DateFormat df1 = DateFormat.getDateInstance();
+
+        Date date1 = null;
+        Date date2 = null;
+
+        try {
+            date1 = df1 .parse(dateString1);
+            date2 = df1 .parse(dateString2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        while(!cal1.after(cal2))
+        {
+            dates.add(cal1.getTime());
+            cal1.add(Calendar.DATE, 1);
+        }
+        return dates;
     }
 
 }

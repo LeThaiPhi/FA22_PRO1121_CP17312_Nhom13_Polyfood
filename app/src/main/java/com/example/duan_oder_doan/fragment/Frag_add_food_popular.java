@@ -47,6 +47,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_add_food_popular extends Fragment {
@@ -82,6 +83,7 @@ public class Frag_add_food_popular extends Fragment {
                     SanPham_Popular sanPham_popular = dataSnapshot.getValue(SanPham_Popular.class);
                     sanPham_popularList.add(sanPham_popular);
                 }
+                Collections.reverse(sanPham_popularList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
 

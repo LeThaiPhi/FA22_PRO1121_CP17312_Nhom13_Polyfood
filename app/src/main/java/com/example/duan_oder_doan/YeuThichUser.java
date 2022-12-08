@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class YeuThichUser extends AppCompatActivity {
@@ -73,6 +74,7 @@ public class YeuThichUser extends AppCompatActivity {
                     sanPham_favorite = dataSnapshot.getValue(SanPham_Favorite.class);
                     sanPham_favoriteList.add(sanPham_favorite);
                 }
+                Collections.reverse(sanPham_favoriteList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
             }
