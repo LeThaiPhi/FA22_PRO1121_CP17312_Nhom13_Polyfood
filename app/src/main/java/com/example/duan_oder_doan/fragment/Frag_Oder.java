@@ -69,8 +69,8 @@ public class Frag_Oder extends Fragment {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             hoaDonChiTiet = dataSnapshot.getValue(HoaDonChiTiet.class);
                             hoaDonChiTietList.add(hoaDonChiTiet);
-                            Collections.reverse(hoaDonChiTietList);
                         }
+                        Collections.reverse(hoaDonChiTietList);
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
 

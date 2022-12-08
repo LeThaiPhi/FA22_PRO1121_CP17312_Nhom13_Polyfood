@@ -81,8 +81,8 @@ public class OdersManageActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             hoaDonChiTietAdmin = dataSnapshot.getValue(HoaDonChiTietAdmin.class);
                             hoaDonChiTietAdminList.add(hoaDonChiTietAdmin);
-                            Collections.reverse(hoaDonChiTietAdminList);
                         }
+                        Collections.reverse(hoaDonChiTietAdminList);
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
                     }

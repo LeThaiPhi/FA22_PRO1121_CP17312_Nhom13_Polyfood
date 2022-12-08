@@ -41,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callback {
@@ -245,6 +246,7 @@ public class Frag_add_food  extends Fragment implements Adapter_Food_Admin.Callb
                     sanPham = dataSnapshot.getValue(SanPham.class);
                     sanPhamList.add(sanPham);
                 }
+                Collections.reverse(sanPhamList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 id = sanPhamList.size();

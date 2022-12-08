@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan_oder_doan.adapter.Adapter_Food_Admin;
@@ -32,6 +33,7 @@ public class FoodList extends AppCompatActivity{
     private Adapter_Food_User adapter;
     private RecyclerView recyclerView;
     private SanPham sanPham;
+    private TextView tv_nameCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,12 @@ public class FoodList extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        tv_nameCategory = findViewById(R.id.tv_nameCategory);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         String category = bundle.getString("nameCategory");
+        tv_nameCategory.setText(""+category+" List");
         recyclerView = findViewById(R.id.rcv_food);
         sanPhamList = new ArrayList<>();
         adapter = new Adapter_Food_User(sanPhamList);
@@ -59,9 +64,9 @@ public class FoodList extends AppCompatActivity{
                     sanPham = dataSnapshot.getValue(SanPham.class);
                     if (sanPham.getCategory().equals(category)) {
                         sanPhamList.add(sanPham);
-                        Collections.reverse(sanPhamList);
                     }
                 }
+                Collections.reverse(sanPhamList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
 

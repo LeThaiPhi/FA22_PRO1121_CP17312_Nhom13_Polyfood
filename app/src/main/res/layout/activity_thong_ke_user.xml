@@ -73,15 +73,5 @@
                 android:layout_gravity="center"/>
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_clear"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Clear"
-        android:textColor="#fff"
-        android:background="@drawable/border5"/>
 
 </LinearLayout>

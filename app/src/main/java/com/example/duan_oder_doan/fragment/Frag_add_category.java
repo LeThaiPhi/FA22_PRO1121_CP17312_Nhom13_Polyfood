@@ -219,6 +219,7 @@ public class Frag_add_category extends Fragment implements Adapter_Category_Admi
                     theLoai = dataSnapshot.getValue(TheLoai.class);
                     theLoaiList.add(theLoai);
                 }
+                Collections.reverse(theLoaiList);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 id = theLoaiList.size();

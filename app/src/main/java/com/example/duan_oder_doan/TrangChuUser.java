@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -235,6 +236,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
                     SanPham_Popular sanPham_popular = dataSnapshot.getValue(SanPham_Popular.class);
                     sanPham_popularList.add(sanPham_popular);
                 }
+                Collections.reverse(sanPham_popularList);
                 adapter_food_popular_user.notifyDataSetChanged();
                 rcv_popular.setAdapter(adapter_food_popular_user);
 

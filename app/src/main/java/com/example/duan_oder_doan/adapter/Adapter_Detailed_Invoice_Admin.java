@@ -136,14 +136,32 @@ public class Adapter_Detailed_Invoice_Admin extends RecyclerView.Adapter<View_Ho
         }
         if (holder.tvStatus.getText().toString().equals("Doing")) {
             holder.line_item1.setBackgroundResource(R.drawable.a_doing);
-            holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.border2);
+        }
+        if (holder.tvStatus.getText().toString().equals("Shipping")) {
+            holder.line_item1.setBackgroundResource(R.drawable.a_shipping);
+            holder.tvStatus.setOnClickListener(v ->{
+                String status = "Done";
+                hoaDonChiTietAdminList.clear();
+                notifyDataSetChanged();
+                HoaDonChiTietAdmin hoaDonChiTietAdmin1 = new HoaDonChiTietAdmin(hoaDonChiTietAdmin.getId(), hoaDonChiTietAdmin.getDate(), hoaDonChiTietAdmin.getSum_Price(), hoaDonChiTietAdmin.getName(), hoaDonChiTietAdmin.getPhone(), hoaDonChiTietAdmin.getAddress(), status);
+                FirebaseDatabase.getInstance().getReference("Detailed_Invoices")
+                        .child(String.valueOf(hoaDonChiTietAdmin.getId()))
+                        .setValue(hoaDonChiTietAdmin1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                }
+                            }
+                        });
+
+            });
         }
         if (holder.tvStatus.getText().toString().equals("Done")) {
             holder.line_item1.setBackgroundResource(R.drawable.a_done);
-            holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.border2);
         }
+
 
     }
 
