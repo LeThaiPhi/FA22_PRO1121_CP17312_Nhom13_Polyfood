@@ -84,7 +84,7 @@ public class Frag_Cart extends Fragment implements Adapter_Receipt_User.Callback
                         User userProfile = snapshot.getValue(User.class);
 
                         if (userProfile != null) {
-                            name_user = userProfile.getEmail();
+                            name_user = userProfile.getFullName();
                             email_user = userProfile.getEmail();
                             pass_user = userProfile.getPassword();
                             phone_user = userProfile.getPhone();
