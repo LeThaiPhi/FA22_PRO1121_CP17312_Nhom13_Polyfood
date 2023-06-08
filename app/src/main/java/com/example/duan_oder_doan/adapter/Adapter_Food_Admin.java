@@ -58,6 +58,7 @@ public class Adapter_Food_Admin extends RecyclerView.Adapter<View_Holder_Food_Ad
         holder.tvNoteFood.setText(sanPham.getNote_product());
         Picasso.get().load(sanPham.getImg_product()).into(holder.imgItemFood);
         holder.imgItemFood.setOnClickListener(v ->{
+
             SanPham_Popular sanPham_popular = new SanPham_Popular(sanPham.getImg_product(),sanPham.getName_product(), sanPham.getPrice_product(), sanPham.getNote_product());
             FirebaseDatabase.getInstance().getReference("FoodPopulars")
                     .child(sanPham.getName_product())
