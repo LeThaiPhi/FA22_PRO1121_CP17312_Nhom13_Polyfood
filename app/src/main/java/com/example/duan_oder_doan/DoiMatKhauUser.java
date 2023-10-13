@@ -71,7 +71,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DoiMatKhauUser.this,"Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(DoiMatKhauUser.this,"Đã xảy ra sự cố!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -81,42 +81,42 @@ public class DoiMatKhauUser extends AppCompatActivity {
             String newpass = edt_newpass.getText().toString();
 
             if (currpass.isEmpty()) {
-                edt_currpass.setError("Current password is required!");
+                edt_currpass.setError("Sai mật khẩu!");
                 edt_currpass.requestFocus();
                 return;
             }
             if (currpass.length() < 6) {
-                edt_currpass.setError("Min current password length should be 6 characters!");
+                edt_currpass.setError("Độ dài mật khẩu hiện tại tối thiểu phải là 6 ký tự!");
                 edt_currpass.requestFocus();
                 return;
             }if (!currpass.equalsIgnoreCase(password)) {
-                edt_currpass.setError("No duplicate with password!");
+                edt_currpass.setError("Không trùng lặp với mật khẩu!");
                 edt_currpass.requestFocus();
                 return;
             }
 
             if (newpass.isEmpty()) {
-                edt_newpass.setError("New password is required!");
+                edt_newpass.setError("Cần có mật khẩu mới!");
                 edt_newpass.requestFocus();
                 return;
             }
             if (newpass.length() < 6) {
-                edt_newpass.setError("Min new password length should be 6 characters!");
+                edt_newpass.setError("Độ dài mật khẩu hiện tại tối thiểu phải là 6 ký tự!");
                 edt_newpass.requestFocus();
                 return;
             }
 
             if (pass.isEmpty()) {
-                edt_pass.setError("Password is required!");
+                edt_pass.setError("Nhập mật khẩu!");
                 edt_pass.requestFocus();
                 return;
             }
             if (pass.length() < 6) {
-                edt_pass.setError("Min password length should be 6 characters!");
+                edt_pass.setError("Độ dài mật khẩu hiện tại tối thiểu phải là 6 ký tự!");
                 edt_pass.requestFocus();
                 return;
             }if (!pass.equalsIgnoreCase(newpass)) {
-                edt_pass.setError("No duplicate with new password!");
+                edt_pass.setError("Không trùng lặp với mật khẩu mới!");
                 edt_pass.requestFocus();
                 return;
             }
@@ -135,7 +135,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(DoiMatKhauUser.this, "Change password successfully!", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(DoiMatKhauUser.this, "Đổi mật khẩu thành công!", Toast.LENGTH_LONG).show();
                                                     Intent intent = new Intent(DoiMatKhauUser.this, ThongTinUser.class);
                                                     Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DoiMatKhauUser.this).toBundle();
                                                     startActivity(intent, bundle);
@@ -143,7 +143,7 @@ public class DoiMatKhauUser extends AppCompatActivity {
                                             }
                                         });
                             }else {
-                                Toast.makeText(DoiMatKhauUser.this,"Try again! Something wrong happened!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(DoiMatKhauUser.this,"Thử lại! Có điều gì đó không ổn đã xảy ra!", Toast.LENGTH_LONG).show();
                             }
                         }
                     });

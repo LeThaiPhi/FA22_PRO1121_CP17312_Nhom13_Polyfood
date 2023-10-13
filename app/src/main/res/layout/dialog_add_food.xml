@@ -8,7 +8,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Food"
+        android:text="Thêm món"
         android:gravity="center"
         android:textSize="25dp"
         android:padding="10dp"
@@ -18,22 +18,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Information Food"
         android:layout_marginTop="20dp"
+        android:text="Thông tin món ăn"
         android:textColor="#2E2E2E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <EditText
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:id="@+id/edt_nameFood"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Name food"
-        android:textColorHint="#2E2E2E"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border"
-        android:padding="15dp" />
+        android:hint="Tên món ăn"
+        android:padding="15dp"
+        android:textColorHint="#2E2E2E" />
+
     <EditText
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -41,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Price food"
+        android:hint="Giá"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp" />
@@ -53,23 +54,24 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp">
     </Spinner>
+
     <EditText
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:id="@+id/edt_noteFood"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Note food"
-        android:textColorHint="#2E2E2E"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border"
-        android:padding="15dp" />
+        android:hint="Nội dung(Mô tả)"
+        android:padding="15dp"
+        android:textColorHint="#2E2E2E" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Image Category"
+        android:text="Ảnh sản phẩm"
         android:layout_marginTop="20dp"
         android:textColor="#2E2E2E"
         android:textSize="20dp"/>
@@ -92,7 +94,7 @@
             android:id="@+id/btn_imgfood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose Image"
+            android:text="Chọn ảnh"
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"/>
@@ -106,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Save"
+        android:text="Lưu"
         android:textColor="#fff"
         android:layout_marginBottom="30dp"
         android:background="@drawable/border5"/>

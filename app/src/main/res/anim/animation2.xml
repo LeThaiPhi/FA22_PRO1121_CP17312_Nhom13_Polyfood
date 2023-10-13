@@ -6,7 +6,7 @@
     <translate android:fromXDelta="0" android:toXDelta="0"
         android:fromYDelta="0" android:toYDelta="400"
         android:duration="2000"
-        android:startOffset="8000"/>
+        android:startOffset="4000"/>
 
     <alpha android:fromAlpha="0"
         android:toAlpha="1"
@@ -15,5 +15,5 @@
     <alpha android:fromAlpha="1"
         android:toAlpha="0"
         android:duration="2000"
-        android:startOffset="8000"/>
+        android:startOffset="4000"/>
 </set>

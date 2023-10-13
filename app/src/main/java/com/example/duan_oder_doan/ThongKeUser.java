@@ -61,7 +61,7 @@ public class ThongKeUser extends AppCompatActivity {
         DatabaseReference reference = database.getReference("Users");
 
         reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("Detailed_Invoice").addValueEventListener(new ValueEventListener() {
+                .child("Chi tiết_Hóa đơn").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -71,11 +71,11 @@ public class ThongKeUser extends AppCompatActivity {
                             sum2 = sum2+ Integer.parseInt(hoaDonChiTiet.getSum_Price());
                         }
                         tv_sumoder.setText(String.valueOf(sum1));
-                        tv_summoney.setText("$ "+(String.valueOf(sum2)));
+                        tv_summoney.setText((String.valueOf(sum2) +" K "));
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(ThongKeUser.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ThongKeUser.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
                     }
                 });
     }

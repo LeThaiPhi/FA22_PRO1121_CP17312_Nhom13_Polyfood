@@ -96,7 +96,7 @@ public class AvatarUser extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AvatarUser.this,"Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(AvatarUser.this,"Đã xảy ra sự cố!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -115,7 +115,7 @@ public class AvatarUser extends AppCompatActivity {
                                 firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        Toast.makeText(AvatarUser.this,"Loading...", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AvatarUser.this,"Đang tải lên...", Toast.LENGTH_LONG).show();
                                         image1 = uri.toString();
                                     }
                                 });
@@ -162,7 +162,7 @@ public class AvatarUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(AvatarUser.this,"User avatar updated!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AvatarUser.this,"Cập nhật ảnh đại diện thành công!", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(AvatarUser.this, GioiThieuUser.class);
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(AvatarUser.this).toBundle();
                                 startActivity(intent, bundle);

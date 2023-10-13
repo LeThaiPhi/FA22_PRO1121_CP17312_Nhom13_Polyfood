@@ -74,7 +74,7 @@ public class OdersManageActivity extends AppCompatActivity {
 
     private void getList(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("Detailed_Invoices");
+        DatabaseReference reference = database.getReference("Chi tiết_Hóa đơn");
         reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,7 +89,7 @@ public class OdersManageActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(OdersManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(OdersManageActivity.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
                     }
                 });
     }

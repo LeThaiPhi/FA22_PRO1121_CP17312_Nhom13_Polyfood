@@ -106,7 +106,7 @@ public class StatisticalManageActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_check).setOnClickListener(v ->{
-            if (tvFromDate.getText().toString().equals("From date") || tvToDate.getText().toString().equals("To date")) {
+            if (tvFromDate.getText().toString().equals("Từ ngày") || tvToDate.getText().toString().equals("Đến ngày")) {
                 Toast.makeText(this, "Please select a date!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -123,7 +123,7 @@ public class StatisticalManageActivity extends AppCompatActivity {
                 }
             }
             tvSumoder.setText(String.valueOf(sum1));
-            tvSummoney.setText("$ "+(String.valueOf(sum2)));
+            tvSummoney.setText((String.valueOf(sum2)+ " K "));
 
         });
 
@@ -150,7 +150,7 @@ public class StatisticalManageActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(StatisticalManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(StatisticalManageActivity.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -168,7 +168,7 @@ public class StatisticalManageActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(StatisticalManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(StatisticalManageActivity.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -186,14 +186,14 @@ public class StatisticalManageActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(StatisticalManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(StatisticalManageActivity.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
 
         hoaDonChiTietAdminList.clear();
         sum1 =0;
         sum2 = 0;
-        DatabaseReference reference3 = database.getReference("Detailed_Invoices");
+        DatabaseReference reference3 = database.getReference("Chi tiết_Hóa đơn");
         reference3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -204,12 +204,12 @@ public class StatisticalManageActivity extends AppCompatActivity {
                     sum2 = sum2+ Integer.parseInt(hoaDonChiTietAdmin.getSum_Price());
                 }
                 tvSumoder.setText(String.valueOf(sum1));
-                tvSummoney.setText("$ "+(String.valueOf(sum2)));
+                tvSummoney.setText((String.valueOf(sum2)+" K "));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(StatisticalManageActivity.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(StatisticalManageActivity.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Restaurant Information"
+        android:text="Thông tin nhà hàng"
         android:layout_marginTop="20dp"
         android:textSize="25dp"
         android:textColor="@color/black"
@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Poly Food Restaurant"
+                android:text="UEF Restaurant"
                 android:layout_gravity="center"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -49,17 +49,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address: số 13, phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội."
+                android:text="Địa chỉ: 141 Điện Biên Phủ,Bình Thạnh ,Hồ Chí Minh."
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: poly@gmail.com"
+                android:text="Email: uef@gmail.com"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone no: 0985740301"
+                android:text="Số điện thoại: 0902679934"
                 android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Welcome to Foly Food! Hasty and tasty!"
+        android:text="Chào mừng đến với UEF Restaurant!"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -84,25 +84,27 @@
             android:layout_weight="1"
             android:background="@drawable/mhc5"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_mhc1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Poly Food"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:layout_marginTop="220dp"/>
+                android:layout_marginTop="220dp"
+                android:text="UEF Restaurant"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_mhc2"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="Let's experience delicious food together with Foly."
-                android:textColor="@color/black"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_gravity="center" />
+                android:text="Hãy đặt những món ngon tại \n UEF Restaurant."
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,14 +117,14 @@
                     android:id="@+id/btn_login"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="login"
+                    android:text="Đăng nhập"
                     android:background="@drawable/border"
                     android:backgroundTint="#fff" />
                 <Button
                     android:id="@+id/btn_signup"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="signup"
+                    android:text="Đăng ký"
                     android:background="@drawable/border"
                     android:backgroundTint="#2E2E2E"
                     android:textColor="#fff"

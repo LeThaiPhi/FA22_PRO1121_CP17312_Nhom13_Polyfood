@@ -15,28 +15,22 @@
         android:layout_width="150dp"
         android:layout_height="110dp"
         android:src="@drawable/mhc6"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get On Board!"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-    <TextView
-        android:id="@+id/tv_mhc2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="Create your profile to start your Journey"
-        android:textColor="@color/black"/>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:text="Tạo tài khoản!"
+        android:textColor="@color/black"
+        android:textSize="32dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edt_name"
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
         android:layout_height="60dp"
-        android:hint="Full Name"
+        android:hint=" Họ tên"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
@@ -58,22 +52,22 @@
     <EditText
         android:id="@+id/edt_phone"
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
         android:layout_height="60dp"
-        android:hint="Phone No"
-        android:inputType="phone"
-        android:textColorHint="#2E2E2E"
+        android:layout_marginTop="15dp"
         android:background="@drawable/border"
-        android:padding="15dp"
         android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-        android:drawablePadding="15dp" />
+        android:drawablePadding="15dp"
+        android:hint="Số điện thoại"
+        android:inputType="phone"
+        android:padding="15dp"
+        android:textColorHint="#2E2E2E" />
 
     <EditText
         android:id="@+id/edt_pass"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:layout_height="60dp"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
@@ -87,7 +81,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#2E2E2E"
         android:background="@drawable/border"
-        android:text="Signup"
+        android:text="Đăng ký"
         android:textColor="#fff"
         android:layout_marginTop="20dp"/>
 
@@ -101,14 +95,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:text="Already have an Account?"
+            android:text="Bạn đã có tài khoản ?"
             android:textColor="@color/black"/>
         <TextView
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17dp"
-            android:text=" Login"
+            android:text=" Đăng nhập"
             android:textColor="#3391DC"
             android:textStyle="bold"/>
     </LinearLayout>

@@ -93,7 +93,7 @@ public class GioiThieuUser extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(GioiThieuUser.this,"Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(GioiThieuUser.this,"Đã xảy ra sự cố!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -136,12 +136,12 @@ public class GioiThieuUser extends AppCompatActivity {
                 dialog.dismiss();
             });
             dialog.findViewById(R.id.tv_male).setOnClickListener(view ->{
-                tv_gender.setText("Male");
+                tv_gender.setText("Nam");
                 update_gender();
                 dialog.dismiss();
             });
             dialog.findViewById(R.id.tv_female).setOnClickListener(view ->{
-                tv_gender.setText("Female");
+                tv_gender.setText("Nữ");
                 update_gender();
                 dialog.dismiss();
             });
@@ -189,7 +189,7 @@ public class GioiThieuUser extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(GioiThieuUser.this,"User gender no updated!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(GioiThieuUser.this,"Giới tính người dùng không được cập nhật!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -205,7 +205,7 @@ public class GioiThieuUser extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(GioiThieuUser.this,"User date of birth no updated!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(GioiThieuUser.this,"Ngày sinh của người dùng không được cập nhật!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

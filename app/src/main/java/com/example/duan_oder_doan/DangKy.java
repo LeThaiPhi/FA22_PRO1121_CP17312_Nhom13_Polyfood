@@ -71,36 +71,36 @@ public class DangKy extends AppCompatActivity {
         String address = "";
 
         if (fullName.isEmpty()) {
-            edt_name.setError("Full name is required");
+            edt_name.setError("Điền đầy đủ họ tên");
             edt_name.requestFocus();
             return;
         }
 
         if (email.isEmpty()) {
-            edt_email.setError("E-mail is required");
+            edt_email.setError("Nhập E-mail ");
             edt_email.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edt_email.setError("Please provide valid email!");
+            edt_email.setError("Vui lòng cung cấp email hợp lệ!");
             edt_email.requestFocus();
             return;
         }
 
         if (phone.isEmpty()) {
-            edt_phone.setError("Phone no is required");
+            edt_phone.setError("Cần có số điện thoại");
             edt_phone.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            edt_pass.setError("Password is required");
+            edt_pass.setError("Cần có mật khẩu");
             edt_pass.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            edt_pass.setError("Min password length should be 6 characters!");
+            edt_pass.setError("Độ dài mật khẩu tối thiểu phải là 6 ký tự!");
             edt_pass.requestFocus();
             return;
         }
@@ -117,7 +117,7 @@ public class DangKy extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(DangKy.this, "User has been signup successfully!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(DangKy.this, "Người dùng đã đăng ký thành công!", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(DangKy.this, DangNhap.class);
                                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangKy.this).toBundle();
                                                 startActivity(intent, bundle);
@@ -125,7 +125,7 @@ public class DangKy extends AppCompatActivity {
                                         }
                             });
                         } else {
-                            Toast.makeText(DangKy.this, "Failed to signup! Try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DangKy.this, "Đăng ký không thành công! Thử lại!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

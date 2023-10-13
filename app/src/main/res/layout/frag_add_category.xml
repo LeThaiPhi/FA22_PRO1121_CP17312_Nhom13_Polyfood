@@ -16,7 +16,7 @@
         android:background="@drawable/border"
         android:drawableLeft="@drawable/ic_baseline_search_24"
         android:drawablePadding="10dp"
-        android:hint="Search Category"
+        android:hint="Tìm loại sản phẩm"
         android:padding="15dp"
         android:textColorHint="#000000"
         android:textStyle="italic"

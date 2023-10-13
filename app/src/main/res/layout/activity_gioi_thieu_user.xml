@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Introduce"
+            android:text="Giới thiệu"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="25dp"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Change avatar"
+            android:text="Đổi ảnh đại diện"
             android:layout_gravity="center"
             android:textSize="20dp"
             android:textColor="#FF9800"/>
@@ -72,7 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Tên"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:text="Phạm Gia Công"
+            android:text="UEF Restaurant"
             android:gravity="end"
             android:textSize="20dp"
             android:layout_gravity="center"
@@ -108,7 +108,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone No"
+            android:text="Số điện thoại"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>
@@ -119,7 +119,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:text="0987654321"
+            android:text="0902679934"
             android:gravity="end"
             android:textSize="20dp"
             android:layout_gravity="center"
@@ -155,7 +155,7 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="cong@gmail.com"
+            android:text="UEF@gmail.com"
             android:gravity="end"
             android:textSize="20dp"
             android:layout_gravity="center"
@@ -180,7 +180,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gender"
+            android:text="Giới tính"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>
@@ -216,7 +216,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date of birth"
+            android:text="Ngày sinh"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>

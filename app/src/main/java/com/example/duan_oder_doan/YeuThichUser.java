@@ -81,7 +81,7 @@ public class YeuThichUser extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(YeuThichUser.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(YeuThichUser.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
     }

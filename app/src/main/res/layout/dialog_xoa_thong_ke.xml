@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete statistical"
+        android:text="Xóa thống kê"
         android:layout_marginTop="15dp"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="All transaction history information and statistics will be deleted. Do you want to delete your account?"
+        android:text="Mọi thông tin, thống kê lịch sử giao dịch sẽ bị xóa. Bạn có muốn xóa tài khoản của mình không?"
         android:gravity="center"
         android:textColor="@color/black"
         android:layout_gravity="center"/>
@@ -36,7 +36,7 @@
             android:id="@+id/btn_agree"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Agree"
+            android:text="Đồng ý"
             android:textColor="#F44336"
             android:background="@drawable/border"
             android:layout_height="wrap_content"/>
@@ -44,7 +44,7 @@
             android:id="@+id/btn_cancel"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="hủy"
             android:textColor="#4F4F50"
             android:layout_marginLeft="10dp"
             android:background="@drawable/border"

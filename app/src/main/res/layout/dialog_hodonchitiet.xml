@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detailed Invoice"
+        android:text="Hóa đơn chi tiết"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:textColor="#000000"
@@ -18,7 +18,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name: Cong"
+        android:text="Name: UEF"
         android:textSize="17dp"
         android:textColor="#000000"
         android:layout_marginTop="30dp"/>
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantities"
+            android:text="Số lượng"
             android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="17dp"
@@ -81,7 +81,7 @@
         android:id="@+id/tv_sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sum: 12$"
+        android:text="Tổng: 12K"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginTop="20dp"

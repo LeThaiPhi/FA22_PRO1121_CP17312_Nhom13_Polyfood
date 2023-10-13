@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Statistical"
+            android:text="Thống kê"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="25dp"
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total orders placed"
+                android:text="Tổng số đơn hàng đã đặt"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tv_sumoder"
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total money"
+                android:text="Tổng số tiền"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tv_summoney"

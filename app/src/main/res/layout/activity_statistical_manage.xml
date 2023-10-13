@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Statistical"
+            android:text="Thống kê"
             android:textColor="#000000"
             android:textSize="25dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Users"
+            android:text="Người dùng"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categories"
+            android:text="Loại"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:textColor="@color/black"/>
@@ -127,7 +127,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
-        android:text="From date"
+        android:text="từ ngày"
         android:textColor="#000000"
         android:padding="5dp"
         android:gravity="center"
@@ -148,7 +148,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:text="To date"
+        android:text="đến ngày"
         android:textColor="#000000"
         android:padding="5dp"
         android:gravity="center"
@@ -162,7 +162,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Check"
+        android:text="Đồng ý"
         android:textColor="#fff"
         android:background="@drawable/border5"/>
 
@@ -182,7 +182,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number of orders placed"
+                android:text="Số lượng đơn đặt hàng"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tv_sumoder"
@@ -203,7 +203,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Turnover"
+                android:text="Doanh số"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tv_summoney"

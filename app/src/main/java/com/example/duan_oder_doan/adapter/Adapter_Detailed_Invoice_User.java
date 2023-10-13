@@ -71,11 +71,11 @@ public class Adapter_Detailed_Invoice_User extends RecyclerView.Adapter<View_Hol
             TextView tv_sum = dialog.findViewById(R.id.tv_sum);
 
 
-            tv_name.setText("Name: "+ hoaDonChiTiet.getName());
-            tv_phone.setText("Phone: "+ hoaDonChiTiet.getPhone());
-            tv_address.setText("Address: "+ hoaDonChiTiet.getAddress());
-            tv_date.setText("Date: "+ hoaDonChiTiet.getDate());
-            tv_sum.setText("Sum: $ "+ hoaDonChiTiet.getSum_Price());
+            tv_name.setText("Tên: "+ hoaDonChiTiet.getName());
+            tv_phone.setText("SDT: "+ hoaDonChiTiet.getPhone());
+            tv_address.setText("Địa chỉ: "+ hoaDonChiTiet.getAddress());
+            tv_date.setText("Ngày: "+ hoaDonChiTiet.getDate());
+            tv_sum.setText("Tổng: "+ hoaDonChiTiet.getSum_Price() +" K");
 
             RecyclerView recyclerView = dialog.findViewById(R.id.rcv_detailed_invoice);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(v.getContext(), DividerItemDecoration.VERTICAL);

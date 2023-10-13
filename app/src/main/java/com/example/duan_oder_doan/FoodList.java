@@ -74,7 +74,7 @@ public class FoodList extends AppCompatActivity{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FoodList.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(FoodList.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -17,7 +17,7 @@
             android:id="@+id/tv_nameCategory"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Food list"
+            android:text="Danh sách món"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="25dp"

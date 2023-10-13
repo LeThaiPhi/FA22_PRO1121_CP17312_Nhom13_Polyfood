@@ -99,7 +99,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TrangChuUser.this,"Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(TrangChuUser.this,"Gặp sự cố !", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -224,7 +224,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TrangChuUser.this, "Get list category faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(TrangChuUser.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
         DatabaseReference reference1 = database.getReference("FoodPopulars");
@@ -244,7 +244,7 @@ public class TrangChuUser extends AppCompatActivity implements Adapter_Category_
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TrangChuUser.this, "Get list category faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(TrangChuUser.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
     }

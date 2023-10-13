@@ -43,13 +43,13 @@ public class XacNhanPass_Email extends AppCompatActivity {
         String email = edt_email.getText().toString();
 
         if (email.isEmpty()) {
-            edt_email.setError("Email is required!");
+            edt_email.setError("Yêu cầu nhập Email!");
             edt_email.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edt_email.setError("Please provide valid email!");
+            edt_email.setError("Vui lòng cung cấp email hợp lệ!");
             edt_email.requestFocus();
             return;
         }
@@ -59,12 +59,12 @@ public class XacNhanPass_Email extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(XacNhanPass_Email.this, "Check your email to reset your password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(XacNhanPass_Email.this, "Kiểm tra email của bạn để thiết lập lại mật khẩu của bạn!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(XacNhanPass_Email.this, DangNhap.class);
                     Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(XacNhanPass_Email.this).toBundle();
                     startActivity(intent, bundle);
                 }else {
-                    Toast.makeText(XacNhanPass_Email.this,"Try again! Something wrong happened!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(XacNhanPass_Email.this,"Thử lại! Đã xảy ra sự cố!", Toast.LENGTH_LONG).show();
                 }
             }
         });

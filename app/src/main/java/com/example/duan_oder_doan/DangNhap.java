@@ -64,25 +64,25 @@ public class DangNhap extends AppCompatActivity {
         String password = edt_pass.getText().toString();
 
         if (email.isEmpty()) {
-            edt_email.setError("E-mail is required!");
+            edt_email.setError("Nhập E-mail!");
             edt_email.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edt_email.setError("Please enter a valid email!");
+            edt_email.setError("Vui lòng nhập email hợp lệ!");
             edt_email.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            edt_pass.setError("Password is required!");
+            edt_pass.setError("Nhập mật khẩu!");
             edt_pass.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            edt_pass.setError("Min password length should be 6 characters!");
+            edt_pass.setError("Độ dài mật khẩu tối thiểu phải là 6 ký tự!");
             edt_pass.requestFocus();
             return;
         }
@@ -101,7 +101,7 @@ public class DangNhap extends AppCompatActivity {
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
                                 startActivity(intent, bundle);
                             } else {
-                                Toast.makeText(DangNhap.this, "User has been login successfully!",
+                                Toast.makeText(DangNhap.this, "Đăng nhập thành công!",
                                         Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(DangNhap.this, TrangChuUser.class);
                                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(DangNhap.this).toBundle();
@@ -110,7 +110,7 @@ public class DangNhap extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(DangNhap.this, "Failed to login! Please check your credentials!",
+                            Toast.makeText(DangNhap.this, "Đăng nhập thất bại! Vui lòng kiểm tra thông tin đăng nhập của bạn!",
                                     Toast.LENGTH_LONG).show();
                         }
                     }

@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Change password"
+            android:text="Đổi mật khẩu"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="25dp"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Enter current password"
+        android:text="Mật khẩu cũ"
         android:layout_marginTop="25dp"
         android:textColor="#2E2E2E"
         android:textSize="20dp"/>
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Current password"
+        android:hint="Nhập mật khẩu"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Enter new password"
+        android:text="Mật khẩu mới"
         android:layout_marginTop="30dp"
         android:textColor="#2E2E2E"
         android:textSize="20dp"/>
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="New password"
+        android:hint="Nhập mật khẩu"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:layout_height="60dp"
-        android:hint="Enter new password again"
+        android:hint="Nhập lại mật khẩu"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp"
@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Update"
+        android:text="Đồng ý"
         android:textColor="#fff"
         android:background="@drawable/border5"/>
 

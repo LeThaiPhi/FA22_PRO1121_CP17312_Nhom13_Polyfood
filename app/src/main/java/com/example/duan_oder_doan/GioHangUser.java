@@ -31,9 +31,9 @@ public class GioHangUser extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
                 if (position == 0) {
-                    tab.setText("Cart");
+                    tab.setText("Giỏ hàng");
                 } else {
-                    tab.setText("Oder");
+                    tab.setText("Hóa đơn");
                 }
             }
         });

@@ -37,13 +37,13 @@ public class AddFoodManageActivity extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position){
                     case 0:
-                        tab.setText("Add Category");
+                        tab.setText("Thêm loại món ăn");
                         break;
                     case 1:
-                        tab.setText("Add Food");
+                        tab.setText("Thêm món ");
                         break;
                     case 2:
-                        tab.setText("Food Popular");
+                        tab.setText("Món ăn phổ biến");
                         break;
                 }
             }

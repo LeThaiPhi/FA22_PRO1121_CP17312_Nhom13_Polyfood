@@ -25,14 +25,14 @@
             android:id="@+id/tv_nameFood"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="Name"
+            android:text="Tên"
             android:textColor="#000000"
             android:textSize="20dp" />
         <TextView
             android:id="@+id/tv_noteFood"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Note" />
+            android:text="Ghi chú" />
     </LinearLayout>
     <ImageView
         android:id="@+id/img_favorite"

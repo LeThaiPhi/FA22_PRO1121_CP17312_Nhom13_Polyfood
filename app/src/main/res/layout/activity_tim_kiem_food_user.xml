@@ -22,7 +22,7 @@
             android:background="@drawable/border"
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:drawablePadding="10dp"
-            android:hint="Find your Food"
+            android:hint="Tìm món ăn"
             android:padding="15dp"
             android:textColorHint="#000000"
             android:textStyle="italic"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Search List"
+        android:text="Danh sách tìm kiếm"
         android:layout_marginLeft="20dp"
         android:textColor="#000000"
         android:textSize="20dp" />

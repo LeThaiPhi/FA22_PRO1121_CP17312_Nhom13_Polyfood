@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Welcome Admin"
+            android:text="Xin chào quản lý"
             android:textColor="#000000"
             android:textSize="25dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Oders"
+                    android:text="Đặt món"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
@@ -115,14 +115,15 @@
                     android:layout_margin="8dp"
                     android:padding="8dp"
                     android:src="@drawable/icon_thongke"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Statistical"
+                    android:text="Thống kê"
                     android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -149,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Add"
+                    android:text="Thêm món"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
@@ -179,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Logout"
+                    android:text="Đăng xuất"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>

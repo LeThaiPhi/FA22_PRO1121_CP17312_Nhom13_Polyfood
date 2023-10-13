@@ -36,13 +36,13 @@ public class TrangChuManage extends AppCompatActivity {
         tv_countOrders.setText(String.valueOf(count));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("Detailed_Invoices");
+        DatabaseReference reference = database.getReference("Chi tiết_Hóa đơn");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     HoaDonChiTietAdmin hoaDonChiTietAdmin = dataSnapshot.getValue(HoaDonChiTietAdmin.class);
-                    if (hoaDonChiTietAdmin.getStatus().equals("Confirm")) {
+                    if (hoaDonChiTietAdmin.getStatus().equals("Xác nhận")) {
                         count = count + 1;
                     }
                 }
@@ -51,7 +51,7 @@ public class TrangChuManage extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TrangChuManage.this, "Get list faild!", Toast.LENGTH_LONG).show();
+                Toast.makeText(TrangChuManage.this, "Lấy danh sách không thành công!", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -8,7 +8,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Food"
+        android:text="Thêm món ăn"
         android:gravity="center"
         android:textSize="25dp"
         android:padding="10dp"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Information Food"
+        android:text="Thông tin món ăn"
         android:layout_marginTop="20dp"
         android:textColor="#2E2E2E"
         android:textSize="20dp"/>
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Name food"
+        android:hint="Tên món ăn"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp" />
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Price food"
+        android:hint="Giá món ăn"
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp" />
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
-        android:hint="Note food"
+        android:hint="Ghi chú "
         android:textColorHint="#2E2E2E"
         android:background="@drawable/border"
         android:padding="15dp" />
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Image Category"
+        android:text="Loại món"
         android:layout_marginTop="20dp"
         android:textColor="#2E2E2E"
         android:textSize="20dp"/>
@@ -92,7 +92,7 @@
             android:id="@+id/btn_imgfoodUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose Image"
+            android:text="Chọn ảnh"
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"/>
@@ -106,7 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Save"
+        android:text="Lưu"
         android:textColor="#fff"
         android:layout_marginBottom="30dp"
         android:background="@drawable/border5"/>

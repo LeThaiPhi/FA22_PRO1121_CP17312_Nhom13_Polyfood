@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Avatar"
+            android:text="Ảnh đại diện"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="25dp"
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Change avatar"
+            android:text="Thay đổi"
             android:layout_gravity="center"
             android:textSize="20dp"
             android:textColor="#000000"/>
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Update"
+        android:text="Cập nhật"
         android:textColor="#fff"
         android:background="@drawable/border5"/>
 
